@@ -6,6 +6,10 @@ export const LandingStyle = styled.div`
     justify-content: space-around;
     flex-wrap: wrap;
   }
+  .start {
+    justify-content: flex-start;
+    align-items: center
+  }
 `;
 export const DividerStyles = styled.div`
   margin: 100px 0;

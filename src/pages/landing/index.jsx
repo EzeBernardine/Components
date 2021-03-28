@@ -7,6 +7,8 @@ import { Flex, Grid } from "../../component/Box/styles";
 import { scales, tableHead, tableContent } from "./data";
 import CustomeTable from "../../component/Table";
 import Modal from "../../component/Modal";
+import { DropdownModal, DropdownShowMoreModal } from "../../component/Dropdown";
+import { dropdownModal } from "./data";
 
 const Landing = () => {
   const [showMenuDropdown, setShowmenuDropdown] = useState(false);
@@ -134,6 +136,40 @@ const Landing = () => {
             </p>
           ) : null}
         </Modal>
+
+        <DividerStyles />
+
+        <div className="flex start">
+          <h3>Select dropdown :</h3>
+          <DropdownModal
+            initial=" Subjects"
+            selectedWeight="bold"
+            selectedColor="#8097B1"
+            dropBk="#fafafb"
+            dropCol="#4D4D4C"
+            right
+            dropDownData={dropdownModal}
+            click={(selected) => console.log(selected)}
+          />
+        </div>
+
+        <DividerStyles />
+
+        <div className="flex start">
+          <h3>Show more dropdown :</h3>
+          <DropdownShowMoreModal
+            click={(selected) => console.log(selected)}
+            showMoreData={dropdownModal}
+            // icon={<OptionIcon />}
+            dropHovBk="transparent"
+            dropBk="transparent"
+            listCol="#8097B1"
+            dropCol="#333"
+            right
+          />
+        </div>
+
+        <DividerStyles />
       </section>
     </LandingStyle>
   );

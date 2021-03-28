@@ -57,3 +57,8 @@ export const tableContent = [
     topPerfStudents: 15,
   },
 ];
+export const dropdownModal = [
+  { list: "CRK" },
+  { list: "Coding" },
+  { list: "Agriculture" },
+];
