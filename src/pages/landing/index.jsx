@@ -8,12 +8,17 @@ import { scales, tableHead, tableContent } from "./data";
 import CustomeTable from "../../component/Table";
 import Modal from "../../component/Modal";
 import Alert from "../../component/Alert";
+import Switch from "../../component/Switch";
+import Tabs from "../../component/Tabs";
 import { DropdownModal, DropdownShowMoreModal } from "../../component/Dropdown";
 import { dropdownModal } from "./data";
 
 const Landing = () => {
   const [showMenuDropdown, setShowmenuDropdown] = useState(false);
   const handleDisplayMenu = () => setShowmenuDropdown(!showMenuDropdown);
+
+  //for tab section
+  const [, setTabType] = useState("Profile Update");
 
   // handles the calling and removal of the modal
   const [callModal, setCallModal] = useState(undefined);
@@ -190,6 +195,31 @@ const Landing = () => {
               reprehenderit inventore deserunt deleniti!
             </p>
           </Alert>
+        </div>
+
+        <DividerStyles />
+
+        <div className="flex start">
+          <h3>Alert</h3>
+
+          <Switch
+            initialState={true}
+            color="#de8430"
+            click={(checked) => console.log(checked)}
+          />
+        </div>
+
+        <DividerStyles />
+
+        <div className="">
+          <h3>Alert</h3>
+
+          <Tabs click={(tab) => setTabType(tab)}>
+            <div label="Profile">Item 1</div>
+            <div label="Security">Item 2</div>
+            <div label="Account Verification">Item 3</div>
+            <div label="Notification">Item 5</div>
+          </Tabs>
         </div>
 
         <DividerStyles />

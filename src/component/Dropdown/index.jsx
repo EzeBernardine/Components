@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DropdownModalBox } from "./Style";
+import { DropdownModalBox } from "./styles";
 import {
   RiArrowDownSLine as UpArrow,
   RiArrowUpSLine as DownArrow,
