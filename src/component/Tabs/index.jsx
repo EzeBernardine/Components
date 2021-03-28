@@ -1,6 +1,6 @@
 /*
  * component: Custom Component
- * author: CEze Bernardine May
+ * author: Eze Bernardine May
  * Date: June 23, 2020
  */
 
