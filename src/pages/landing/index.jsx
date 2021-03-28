@@ -200,7 +200,7 @@ const Landing = () => {
         <DividerStyles />
 
         <div className="flex start">
-          <h3>Alert</h3>
+          <h3>Switch</h3>
 
           <Switch
             initialState={true}

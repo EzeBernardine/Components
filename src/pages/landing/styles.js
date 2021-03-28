@@ -5,6 +5,9 @@ export const LandingStyle = styled.div`
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    > h3 {
+      margin-right: 30px;
+    }
   }
   .start {
     justify-content: flex-start;
