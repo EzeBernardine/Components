@@ -74,20 +74,18 @@ export const ModalWrap = styled("div")`
           top: 0;
         }
         .modalHead {
-          width: 60%;
+          width: 100%;
           position: absolute;
           height: 100%;
           display: flex;
           justify-content: center;
-          align-items: flex-end;
-          padding-bottom: 10px;
+          align-items: center;
           h2 {
             font-size: 1rem;
             color: #58546b;
             font-weight: bold;
             margin: 0 15px;
             text-align: center;
-            padding-bottom: 10px;
           }
         }
         .closeBtn {
@@ -103,7 +101,7 @@ export const ModalWrap = styled("div")`
         overflow-x: hidden;
         width: 100%;
         max-height: 70vh;
-
+        padding: 30px;
         & > div {
           width: 100%;
           min-width: 100%;
