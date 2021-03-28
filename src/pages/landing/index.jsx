@@ -7,6 +7,7 @@ import { Flex, Grid } from "../../component/Box/styles";
 import { scales, tableHead, tableContent } from "./data";
 import CustomeTable from "../../component/Table";
 import Modal from "../../component/Modal";
+import Alert from "../../component/Alert";
 import { DropdownModal, DropdownShowMoreModal } from "../../component/Dropdown";
 import { dropdownModal } from "./data";
 
@@ -167,6 +168,28 @@ const Landing = () => {
             dropCol="#333"
             right
           />
+        </div>
+
+        <DividerStyles />
+        <div className="flex start">
+          <h3>Alert</h3>
+
+          <Alert type="error" duration={false}>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis in
+              cupiditate consectetur quidem praesentium placeat voluptates unde
+              eum quisquam. Dignissimos veniam expedita quis maiores ex eaque
+              reprehenderit inventore deserunt deleniti!
+            </p>
+          </Alert>
+          <Alert type="success" duration={false}>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis in
+              cupiditate consectetur quidem praesentium placeat voluptates unde
+              eum quisquam. Dignissimos veniam expedita quis maiores ex eaque
+              reprehenderit inventore deserunt deleniti!
+            </p>
+          </Alert>
         </div>
 
         <DividerStyles />
