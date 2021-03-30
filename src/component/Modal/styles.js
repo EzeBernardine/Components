@@ -7,21 +7,20 @@ export const ModalWrap = styled("div")`
   right: 0;
   bottom: 0;
   z-index: 10000000;
-  background: ${({ canClose }) =>
-    canClose ? "rgba(0, 0, 0, 0.25)" : "rgba(0, 0, 0, 0.44)"};
+  background: rgba(0, 0, 0, 0.25);
   visibility: ${(props) => (props.show ? "visible" : "hidden")};
 `;
 
-export const ModalOverlay = styled("div")`
-  z-index: -1;
-  position: fixed;
-  touch-action: none;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.25);
-`;
+// export const ModalOverlay = styled("div")`
+//   z-index: -1;
+//   position: fixed;
+//   touch-action: none;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   background-color: rgba(0, 0, 0, 0.25);
+// `;
 
 export const Main = styled("main")`
   position: fixed;
@@ -64,7 +63,7 @@ export const Body = styled("div")`
 `;
 export const Header = styled("div")`
   position: relative;
-  height: 60px;
+  height: ${({ noHeader }) => (noHeader ? 0 : "60px")};
   width: 100%;
   background: ${({ theme }) => theme.palette.common.white};
   box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.27);

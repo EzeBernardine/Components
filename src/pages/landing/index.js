@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { LandingStyle, DividerStyles } from "./styles.js";
 import { RoundScale, BarScale } from "../../component/Scale";
 import MenuIcon from "../../component/MenuIcon";
-import { NavLink } from "react-router-dom";
+import { generateID } from "../../lib/generateID";
 import { Flex, Grid } from "../../component/Box/styles";
 import { scales, tableHead, tableContent } from "./data";
 import CustomeTable from "../../component/Table";
@@ -21,7 +21,7 @@ const Landing = () => {
   const [, setTabType] = useState("Profile Update");
 
   // handles the calling and removal of the modal
-  const [callModal, setCallModal] = useState(undefined);
+  const [callModal, setCallModal] = useState(false);
   // the modal ref
   const modalRef = useRef();
   const showModal = () => {
@@ -46,6 +46,7 @@ const Landing = () => {
           {scales.map((scale) => (
             <RoundScale
               scale={scale}
+              key={generateID(10)}
               baseColor="black"
               color="yellow"
               centerColor="green"
@@ -65,6 +66,7 @@ const Landing = () => {
           {scales.map((scale) => (
             <RoundScale
               scale={scale}
+              key={generateID(14)}
               baseColor="black"
               color="yellow"
               centerColor="green"
@@ -101,6 +103,7 @@ const Landing = () => {
             <BarScale
               width={300}
               height={400}
+              key={generateID(15)}
               headBgColor="#AEF2E5"
               rangeBgColor="#00FFCCCF"
               bottomgColor="#026854CF"
@@ -131,7 +134,9 @@ const Landing = () => {
           show={callModal}
           handleClose={hideModal}
           ref={modalRef}
-          modalTitle={callModal && "Modal Title"}
+          noHeader={false}
+         
+          title={"Modal Title"}
         >
           {callModal ? (
             <p>

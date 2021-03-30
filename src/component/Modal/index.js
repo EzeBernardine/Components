@@ -7,7 +7,6 @@
 import React, { useImperativeHandle, forwardRef, useState } from "react";
 import {
   ModalWrap,
-  ModalOverlay,
   Main,
   Body,
   Header,
@@ -24,11 +23,8 @@ import { theme } from "../../config/theme";
 import { ThemeProvider } from "styled-components";
 
 const Modal = forwardRef(
-  ({ show, handleClose, modalTitle, noHeader, children }, ref) => {
+  ({ show, handleClose, title, noHeader, children }, ref) => {
     let buttonRef = React.createRef();
-
-    // ensures that the container that closes the modal can not be inspected.
-    const [canClose, setCanClose] = useState(false);
 
     useImperativeHandle(ref, () => ({
       /**
@@ -59,26 +55,19 @@ const Modal = forwardRef(
         <ModalWrap
           show={show} // handles the calling and removal of the modal
           ref={buttonRef}
-          canClose={canClose}
-          noHeader={noHeader}
-          onMouseEnter={() => setCanClose(true)}
-          onMouseLeave={() => setCanClose(false)}
         >
-          {canClose ? <ModalOverlay /> : null}
-
           <Main
             show={show} // handles the calling and removal of the modal
           >
-            {canClose ? (
-              <div className="cannotInspect" onClick={() => close()} />
-            ) : null}
+            <div className="cannotInspect" onClick={() => close()} />
 
             <Body>
               <BodyContent>
-                <Header>
-                  <HeaderBox HeaderBoxContent>
-                    <Title>{modalTitle && modalTitle.toUpperCase()}</Title>
+                <Header noHeader={noHeader}>
+                  <HeaderBox>
+                    {noHeader ? null : <Title>{title.toUpperCase()}</Title>}
                   </HeaderBox>
+
                   <HeaderIconContainer onClick={() => close()}>
                     <CloseIcon width="15px" height="15px" color="#b3b3b9" />
                   </HeaderIconContainer>
@@ -100,7 +89,7 @@ Modal.propTypes = {
   show: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   noHeader: PropTypes.bool,
-  modalTitle: PropTypes.string,
+  title: PropTypes.string,
   ref: PropTypes.oneOfType([
     // PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
