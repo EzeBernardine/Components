@@ -3,12 +3,12 @@ import { Styles } from "./styles";
 import { AlertIcon, SuccessIcon } from "../../assets/svg";
 import { useEffect, useState } from "react";
 
-const Alert = ({ type, duration , reCall, children }) => {
+const Alert = ({ type, duration, children }) => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     let timeout =
-      duration   &&
+      duration &&
       setTimeout(() => {
         setVisible(false);
       }, duration);

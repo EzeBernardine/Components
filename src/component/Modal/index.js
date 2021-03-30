@@ -5,10 +5,23 @@
  */
 
 import React, { useImperativeHandle, forwardRef, useState } from "react";
-import { ModalWrap } from "./styles";
+import {
+  ModalWrap,
+  ModalOverlay,
+  Main,
+  Body,
+  Header,
+  HeaderBox,
+  Title,
+  BodyContent,
+  Content,
+  HeaderIconContainer,
+} from "./styles";
 import PropTypes from "prop-types";
 import { CloseIcon } from "../../assets/svg";
 import { OverFlowScrollBar } from "../OverflowScroll/styles";
+import { theme } from "../../config/theme";
+import { ThemeProvider } from "styled-components";
 
 const Modal = forwardRef(
   ({ show, handleClose, modalTitle, noHeader, children }, ref) => {
@@ -42,39 +55,43 @@ const Modal = forwardRef(
     };
 
     return (
-      <ModalWrap
-        show={show} // handles the calling and removal of the modal
-        ref={buttonRef}
-        canClose={canClose}
-        noHeader={noHeader}
-        onMouseEnter={() => setCanClose(true)}
-        onMouseLeave={() => setCanClose(false)}
-      >
-        {canClose ? <div className={"overlay"} /> : null}
+      <ThemeProvider theme={theme}>
+        <ModalWrap
+          show={show} // handles the calling and removal of the modal
+          ref={buttonRef}
+          canClose={canClose}
+          noHeader={noHeader}
+          onMouseEnter={() => setCanClose(true)}
+          onMouseLeave={() => setCanClose(false)}
+        >
+          {canClose ? <ModalOverlay /> : null}
 
-        <div className="main">
-          {canClose ? (
-            <div className="cannotInspect" onClick={() => close()} />
-          ) : null}
+          <Main
+            show={show} // handles the calling and removal of the modal
+          >
+            {canClose ? (
+              <div className="cannotInspect" onClick={() => close()} />
+            ) : null}
 
-          <div className="modalBody">
-            <div className="modalWrap">
-              <header>
-                <div className="modalHead">
-                  <h2>{modalTitle && modalTitle.toUpperCase()}</h2>
-                </div>
-                <span className="closeBtn" onClick={() => close()}>
-                  <CloseIcon width="15px" height="15px" color="#b3b3b9" />
-                </span>
-              </header>
+            <Body>
+              <BodyContent>
+                <Header>
+                  <HeaderBox HeaderBoxContent>
+                    <Title>{modalTitle && modalTitle.toUpperCase()}</Title>
+                  </HeaderBox>
+                  <HeaderIconContainer onClick={() => close()}>
+                    <CloseIcon width="15px" height="15px" color="#b3b3b9" />
+                  </HeaderIconContainer>
+                </Header>
 
-              <OverFlowScrollBar className="modalContainer">
-                {children}
-              </OverFlowScrollBar>
-            </div>
-          </div>
-        </div>
-      </ModalWrap>
+                <OverFlowScrollBar>
+                  <Content>{children}</Content>
+                </OverFlowScrollBar>
+              </BodyContent>
+            </Body>
+          </Main>
+        </ModalWrap>
+      </ThemeProvider>
     );
   }
 );
