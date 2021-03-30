@@ -11,6 +11,13 @@ export const ModalWrap = styled("div")`
   visibility: ${(props) => (props.show ? "visible" : "hidden")};
 `;
 
+export const ModalOverlay = styled("div")`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+`;
 // export const ModalOverlay = styled("div")`
 //   z-index: -1;
 //   position: fixed;
@@ -35,13 +42,6 @@ export const Main = styled("main")`
   transition: 300ms ease-in-out;
   transform: ${(props) =>
     props.show ? "translateY(0)" : "translateY(-80vh);"};
-  .cannotInspect {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
 `;
 
 export const Body = styled("div")`

@@ -13,6 +13,7 @@ import {
   HeaderBox,
   Title,
   BodyContent,
+  ModalOverlay,
   Content,
   HeaderIconContainer,
 } from "./styles";
@@ -59,7 +60,7 @@ const Modal = forwardRef(
           <Main
             show={show} // handles the calling and removal of the modal
           >
-            <div className="cannotInspect" onClick={() => close()} />
+            <ModalOverlay onClick={() => close()} />
 
             <Body>
               <BodyContent>
