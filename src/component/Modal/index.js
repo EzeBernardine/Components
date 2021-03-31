@@ -4,7 +4,7 @@
  * Date: April 16th, 2020
  */
 
-import React, { useImperativeHandle, forwardRef, useState } from "react";
+import React, { useImperativeHandle, forwardRef } from "react";
 import {
   Container,
   Main,
@@ -20,8 +20,6 @@ import {
 import PropTypes from "prop-types";
 import { CloseIcon } from "../../assets/svg";
 import { OverFlowScrollBar } from "../OverflowScroll/styles";
-import { theme } from "../../config/theme";
-import { ThemeProvider } from "styled-components";
 
 const Modal = forwardRef(
   ({ show, handleClose, title, noHeader, children }, ref) => {
@@ -32,14 +30,14 @@ const Modal = forwardRef(
        * prevent the entire body of the app from scrolling.
        * This is to allow easy focus/scroll on the modal
        */
-      preventModalWrapScroll() {
+      preventBodyScroll() {
         buttonRef.current &&
           (buttonRef.current.ownerDocument.body.style.overflow = "hidden");
       },
       /**
        * Returns  entire body scrolling effect.
        */
-      addModalWrapScroll() {
+      addBodyScroll() {
         buttonRef.current &&
           (buttonRef.current.ownerDocument.body.style.overflow = "");
       },
@@ -52,36 +50,34 @@ const Modal = forwardRef(
     };
 
     return (
-      <ThemeProvider theme={theme}>
-        <Container
+      <Container
+        show={show} // handles the calling and removal of the modal
+        ref={buttonRef}
+      >
+        <Main
           show={show} // handles the calling and removal of the modal
-          ref={buttonRef}
         >
-          <Main
-            show={show} // handles the calling and removal of the modal
-          >
-            <Overlay onClick={() => close()} />
+          <Overlay onClick={() => close()} />
 
-            <ModalWrap>
-              <Body>
-                <HeaderWrap noHeader={noHeader}>
-                  <Header>
-                    {noHeader ? null : <Title>{title.toUpperCase()}</Title>}
-                  </Header>
+          <ModalWrap>
+            <Body>
+              <HeaderWrap noHeader={noHeader}>
+                <Header>
+                  {noHeader ? null : <Title>{title.toUpperCase()}</Title>}
+                </Header>
 
-                  <IconWrap onClick={() => close()}>
-                    <CloseIcon width="15px" height="15px" color="#b3b3b9" />
-                  </IconWrap>
-                </HeaderWrap>
+                <IconWrap onClick={() => close()}>
+                  <CloseIcon width="15px" height="15px"  />
+                </IconWrap>
+              </HeaderWrap>
 
-                <OverFlowScrollBar>
-                  <Content>{children}</Content>
-                </OverFlowScrollBar>
-              </Body>
-            </ModalWrap>
-          </Main>
-        </Container>
-      </ThemeProvider>
+              <OverFlowScrollBar>
+                <Content>{children}</Content>
+              </OverFlowScrollBar>
+            </Body>
+          </ModalWrap>
+        </Main>
+      </Container>
     );
   }
 );

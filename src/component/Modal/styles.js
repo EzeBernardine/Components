@@ -72,7 +72,7 @@ export const Header = styled("div")`
 
 export const Title = styled.h2`
   font-size: ${({ theme }) => theme.fontSizes.medium};
-  color: ${({ theme }) => theme.palette.grey[600]};
+  color: ${({ theme }) => theme.palette.grey[400]};
   font-weight: bold;
   margin: 0 15px;
   text-align: center;
@@ -89,6 +89,7 @@ export const IconWrap = styled("span")`
   float: right;
   top: 20px;
   cursor: pointer;
+  color: ${({ theme }) => theme.palette.grey[200]};
 `;
 export const Content = styled("div")`
   overflow-y: auto;
@@ -96,5 +97,6 @@ export const Content = styled("div")`
   width: 100%;
   max-height: 70vh;
   padding: 30px;
+  color: ${({ theme }) => theme.palette.grey[300]};
 `;
 // export const Main = styled("div")``;
