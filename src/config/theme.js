@@ -1,7 +1,7 @@
-import { spacing, fontSizes } from './units';
+import { spacing, fontSizes } from "./units";
 
-const white = '#fff';
-const black = '#111';
+const white = "#fff";
+const black = "#111";
 
 const palette = {
   common: {
@@ -9,27 +9,32 @@ const palette = {
     white,
   },
   primary: {
-    main: 'blue',
-    light: '#146DD6',
+    main: "blue",
+    light: "#146DD6",
     contrastText: white,
   },
   error: {
-    main: '#A51C30',
-    light: '#A7333F',
+    main: "#DF835F",
+    light: "#FFF3EE",
+    contrastText: white,
+  },
+  success: {
+    main: "#2bac20",
+    light: "#80fb765e",
     contrastText: white,
   },
   grey: {
-    100: '#EAEAEA',
-    200: '#C9C5C5',
-    300: '#888',
-    400: '#666',
+    100: "#EAEAEA",
+    200: "#C9C5C5",
+    300: "#888",
+    400: "#666",
   },
 };
 
 const shadows = {
-  0: 'none',
-  1: '0px 5px 10px rgba(0, 0, 0, 0.12)',
-  2: '0px 8px 30px rgba(0, 0, 0, 0.24)',
+  0: "none",
+  1: "0px 5px 10px rgba(0, 0, 0, 0.12)",
+  2: "0px 8px 30px rgba(0, 0, 0, 0.24)",
 };
 
 const typography = {
@@ -38,7 +43,7 @@ const typography = {
 };
 
 const shape = {
-  borderRadius: spacing['xxsmall'],
+  borderRadius: spacing["xxsmall"],
 };
 
 export const theme = {
@@ -47,5 +52,5 @@ export const theme = {
   typography,
   shape,
   fontSizes,
-  spacing
+  spacing,
 };

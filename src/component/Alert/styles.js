@@ -1,17 +1,28 @@
 import styled from "styled-components";
+import { theme } from "../../config/theme";
 
-export const Styles = styled.div`
+export const Container = styled.div`
   width: 100%;
   margin-bottom: 30px;
   position: relative;
   padding: 10px 30px 10px 40px;
   border-radius: 4px;
-  border: ${({ type }) =>
-    type === "success" ? "1px solid #2bac205e" : "1px solid #de84305e"};
-  background: ${({ type }) => (type === "success" ? "#56de301f" : "#de84301f")};
+  border: ${({ type, theme }) =>
+    type === "success"
+      ? `1px solid ${theme.palette.success.main}`
+      : `1px solid ${theme.palette.error.main}`};
+  background: ${({ type, theme }) =>
+    type === "success"
+      ? theme.palette.success.light
+      : theme.palette.error.light};
+
   * {
-    color: ${({ type }) => (type === "success" ? "#2bac20" : "#de8430")} !important;
+    color: ${({ type, theme }) =>
+      type === "success"
+        ? theme.palette.success.main
+        : theme.palette.error.main};
   }
+
   > svg {
     position: absolute;
     top: 10px;

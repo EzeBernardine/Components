@@ -67,7 +67,7 @@ const Modal = forwardRef(
                 </Header>
 
                 <IconWrap onClick={() => close()}>
-                  <CloseIcon width="15px" height="15px"  />
+                  <CloseIcon width="15px" height="15px" />
                 </IconWrap>
               </HeaderWrap>
 

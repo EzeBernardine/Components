@@ -99,4 +99,3 @@ export const Content = styled("div")`
   padding: 30px;
   color: ${({ theme }) => theme.palette.grey[300]};
 `;
-// export const Main = styled("div")``;
