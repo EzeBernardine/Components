@@ -95,7 +95,7 @@ const Landing = () => {
         <h3>Bar Scale :</h3>
         <div
           className="flex"
-          gridCol="repeat(3, 1fr)"
+          column="repeat(3, 1fr)"
           gap="0"
           width="max-content"
         >

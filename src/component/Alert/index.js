@@ -4,20 +4,20 @@ import { AlertIcon, SuccessIcon } from "../../assets/svg";
 import { useEffect, useState } from "react";
 
 const Alert = ({ type, duration, children }) => {
-  /**
-   * handle the display of the alert component.
-   * It is set to false after a a period of time, though if no duration is set, i
-   * it remains true msking the alert component always visible
-   */
+  // handle the display of the alert component.
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     let timeout =
       duration &&
+      /**
+       * visible is set to false after a a period of time, though if no duration is set,
+       * it remains true making the alert component always visible.
+       */
       setTimeout(() => {
         setVisible(false);
       }, duration);
-    return () => clearTimeout(timeout); //Clears the setTimeout to avoid errors
+    return () => timeout && clearTimeout(timeout); //Clears the setTimeout to avoid errors
   });
 
   return (
