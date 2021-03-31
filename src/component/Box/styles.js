@@ -18,6 +18,9 @@ export const Flex = styled.div`
   margin: ${({ margin }) => margin || "0"};
   padding: ${({ pad }) => pad || "0"};
   background-color: ${({ bgColor }) => bgColor || "transparent"};
+  & > * {
+    min-width: 0;
+  }
 `;
 
 export const Container = styled.div`
