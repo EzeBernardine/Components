@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ModalWrap = styled("div")`
+export const Container = styled("div")`
   position: fixed;
   top: 0;
   left: 0;
@@ -11,23 +11,13 @@ export const ModalWrap = styled("div")`
   visibility: ${(props) => (props.show ? "visible" : "hidden")};
 `;
 
-export const ModalOverlay = styled("div")`
+export const Overlay = styled("div")`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
 `;
-// export const ModalOverlay = styled("div")`
-//   z-index: -1;
-//   position: fixed;
-//   touch-action: none;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-//   background-color: rgba(0, 0, 0, 0.25);
-// `;
 
 export const Main = styled("main")`
   position: fixed;
@@ -44,12 +34,9 @@ export const Main = styled("main")`
     props.show ? "translateY(0)" : "translateY(-80vh);"};
 `;
 
-export const Body = styled("div")`
-  position: relative;
+export const ModalWrap = styled("div")`
+  position: relatBody Body Body Body Bodyive;
   max-width: 500px;
-  @media (max-width: 500px) {
-    width: 90%;
-  }
   width: 100%;
   max-height: 80vh;
   height: max-content;
@@ -60,8 +47,11 @@ export const Body = styled("div")`
   background-color: ${({ theme }) => theme.palette.common.white};
   display: flex;
   justify-content: center;
+  @media (max-width: 500px) {
+    width: 90%;
+  }
 `;
-export const Header = styled("div")`
+export const HeaderWrap = styled("div")`
   position: relative;
   height: ${({ noHeader }) => (noHeader ? 0 : "60px")};
   width: 100%;
@@ -71,7 +61,7 @@ export const Header = styled("div")`
   left: 0;
   top: 0;
 `;
-export const HeaderBox = styled("div")`
+export const Header = styled("div")`
   width: 100%;
   position: absolute;
   height: 100%;
@@ -88,12 +78,12 @@ export const Title = styled.h2`
   text-align: center;
 `;
 
-export const BodyContent = styled("div")`
+export const Body = styled("div")`
   height: 100%;
   width: 100%;
 `;
 
-export const HeaderIconContainer = styled("span")`
+export const IconWrap = styled("span")`
   position: relative;
   right: 30px;
   float: right;
@@ -101,7 +91,7 @@ export const HeaderIconContainer = styled("span")`
   cursor: pointer;
 `;
 export const Content = styled("div")`
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
   max-height: 70vh;

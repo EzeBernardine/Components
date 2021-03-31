@@ -6,16 +6,16 @@
 
 import React, { useImperativeHandle, forwardRef, useState } from "react";
 import {
-  ModalWrap,
+  Container,
   Main,
-  Body,
+  ModalWrap,
+  HeaderWrap,
   Header,
-  HeaderBox,
   Title,
-  BodyContent,
-  ModalOverlay,
+  Body,
+  Overlay,
   Content,
-  HeaderIconContainer,
+  IconWrap,
 } from "./styles";
 import PropTypes from "prop-types";
 import { CloseIcon } from "../../assets/svg";
@@ -32,14 +32,14 @@ const Modal = forwardRef(
        * prevent the entire body of the app from scrolling.
        * This is to allow easy focus/scroll on the modal
        */
-      preventBodyScroll() {
+      preventModalWrapScroll() {
         buttonRef.current &&
           (buttonRef.current.ownerDocument.body.style.overflow = "hidden");
       },
       /**
        * Returns  entire body scrolling effect.
        */
-      addBodyScroll() {
+      addModalWrapScroll() {
         buttonRef.current &&
           (buttonRef.current.ownerDocument.body.style.overflow = "");
       },
@@ -53,34 +53,34 @@ const Modal = forwardRef(
 
     return (
       <ThemeProvider theme={theme}>
-        <ModalWrap
+        <Container
           show={show} // handles the calling and removal of the modal
           ref={buttonRef}
         >
           <Main
             show={show} // handles the calling and removal of the modal
           >
-            <ModalOverlay onClick={() => close()} />
+            <Overlay onClick={() => close()} />
 
-            <Body>
-              <BodyContent>
-                <Header noHeader={noHeader}>
-                  <HeaderBox>
+            <ModalWrap>
+              <Body>
+                <HeaderWrap noHeader={noHeader}>
+                  <Header>
                     {noHeader ? null : <Title>{title.toUpperCase()}</Title>}
-                  </HeaderBox>
+                  </Header>
 
-                  <HeaderIconContainer onClick={() => close()}>
+                  <IconWrap onClick={() => close()}>
                     <CloseIcon width="15px" height="15px" color="#b3b3b9" />
-                  </HeaderIconContainer>
-                </Header>
+                  </IconWrap>
+                </HeaderWrap>
 
                 <OverFlowScrollBar>
                   <Content>{children}</Content>
                 </OverFlowScrollBar>
-              </BodyContent>
-            </Body>
+              </Body>
+            </ModalWrap>
           </Main>
-        </ModalWrap>
+        </Container>
       </ThemeProvider>
     );
   }
