@@ -45,7 +45,7 @@ const Alert = ({ type, duration, children }) => {
   );
 };
 
-Alert.prototype = {
+Alert.propTypes = {
   type: PropTypes.oneOf(["error", "success", "warning"]),
   children: PropTypes.elementType,
   duration: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),

@@ -4,7 +4,17 @@
  * Date: April 16th, 2020
  */
 import React from "react";
-import { RoundStyles, BarStyles } from "./styles";
+import {
+  RoundScaleContainer,
+  BarScaleContainer,
+  Scale,
+  Cover,
+  TextWrap,
+  Range,
+  Name,
+  BarScaleName,
+  BarScaleRange,
+} from "./styles";
 
 export const RoundScale = ({
   scale,
@@ -14,49 +24,52 @@ export const RoundScale = ({
   centerColor,
   noText,
   half,
-  height,
-  width,
+  size,
   value,
 }) => {
   return (
-    <RoundStyles
-      className="scale-scale"
-      range={scale.range}
-      baseColor={baseColor}
-      color={color}
-      centerColor={centerColor}
-      thickness={thickness}
-      noText={noText}
-      half={half}
-      height={height}
-      width={width}
-    >
-      <div className="scale-range">
-        <div className="scale-cover">
-          <div className="scale-test">
-            <h5> {value ? value : scale.range}</h5>
-            <small>{scale.name}</small>
-          </div>
-        </div>
-      </div>
-    </RoundStyles>
+    <RoundScaleContainer half={half} size={size}>
+      <Scale
+        baseColor={baseColor}
+        half={half}
+        size={size}
+        range={scale.range}
+        color={color}
+        centerColor={centerColor}
+      >
+        <Cover
+          thickness={thickness}
+          centerColor={centerColor}
+          half={half}
+          noText={noText}
+        >
+          <TextWrap half={half}>
+            <Range noText={noText}> {value ? value : scale.range}</Range>
+            <Name noText={noText}>{scale.name}</Name>
+          </TextWrap>
+        </Cover>
+      </Scale>
+    </RoundScaleContainer>
   );
 };
 
-export const BarScale = ({ scale, headBgColor, bottomgColor, ...props }) => {
+export const BarScale = ({
+  scale,
+  topColor,
+  middleColor,
+  bottomColor,
+  ...props
+}) => {
   return (
-    <>
-      <BarStyles
-        className="stack"
+    <BarScaleContainer {...props}>
+      <BarScaleName>{scale.name}</BarScaleName>
+      <BarScaleRange
         range={scale.range}
-        headBgColor={headBgColor}
-        rangeBgColor="#00FFCCCF"
-        bottomgColor={bottomgColor}
+        topColor={topColor}
+        middleColor={middleColor}
+        bottomColor={bottomColor}
         {...props}
-      >
-        <span className="name">{scale.name}</span>
-        <div className="scale-range" />
-      </BarStyles>
-    </>
+      />
+    </BarScaleContainer>
   );
 };

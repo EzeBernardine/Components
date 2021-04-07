@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import PropTypes from 'prop-types';
 import {
   Wrapper,
   Layout,
@@ -9,17 +10,12 @@ import {
   ListItems,
   Item,
 } from "./styles";
-import {
-  RiArrowDownSLine as UpArrow,
-  RiArrowUpSLine as DownArrow,
-  RiCheckLine as Tick,
-} from "react-icons/ri";
-import { FiMoreVertical as OptionIcon } from "react-icons/fi";
+import { DownIcon, MoreIcon } from "../../assets/svg";
 import { generateID } from "../../lib/generateID";
 import { truncate } from "../../lib/factory.lib";
 
-export const DropdownModal = ({
-  dropDownData,
+const DropdownModal = ({
+  data,
   padding,
   click,
   initial,
@@ -27,6 +23,8 @@ export const DropdownModal = ({
   end,
   canClick = true,
   weight,
+  icon,
+  type,
 }) => {
   const [openModal, setOpenModal] = useState(false);
   const [selected, setContent] = useState(initial || "Select");
@@ -44,10 +42,21 @@ export const DropdownModal = ({
         canClick={canClick}
         padding={padding}
       >
-        <Content canClick={canClick} weight={weight}>
-          {truncate(selected, 20) || "Select"}
-        </Content>
-        <UpArrow />
+        {type === "showmore" ? null : (
+          <Content canClick={canClick} weight={weight}>
+            {truncate(selected, 20) || "Select"}
+          </Content>
+        )}
+
+        {type === "showmore" ? (
+          icon ? (
+            icon
+          ) : (
+            <MoreIcon width="10px" height="10px" />
+          )
+        ) : (
+          <DownIcon width="10px" height="10px" />
+        )}
       </Layout>
 
       {openModal ? (
@@ -55,9 +64,9 @@ export const DropdownModal = ({
       ) : null}
 
       {openModal && (
-        <DropdownWrap end={end} start={start}>
-          <Dropdown>
-            {dropDownData.map((item) => (
+        <DropdownWrap>
+          <Dropdown end={end} start={start}>
+            {data.map((item) => (
               <ListItems
                 onClick={() => canClick && handleSelectOption(`${item.list}`)}
                 key={generateID(15)}
@@ -72,54 +81,16 @@ export const DropdownModal = ({
   );
 };
 
-// export const DropdownShowMoreModal = ({
-//   showMoreData,
-//   dropBk,
-//   dropHovBk,
-//   dropCol,
-//   listCol,
-//   icon,
-//   click,
-//   end,
-// }) => {
-//   const [openModal, setOpenModal] = useState(false);
-
-//   const handleCloseModal = (value) => {
-//     setOpenModal(!openModal);
-//     click(value);
-//   };
-
-//   return (
-//     <DropdownModalBox
-//       dropBk={dropBk}
-//       dropHovBk={dropHovBk}
-//       dropCol={dropCol}
-//       listCol={listCol}
-//       end={end}
-//     >
-//       <div className="click" onClick={() => setOpenModal(!openModal)}>
-//         {icon ? icon : <OptionIcon />}
-//       </div>
-
-//       {openModal && (
-//         <div className="overlay" onClick={() => setOpenModal(!openModal)} />
-//       )}
-
-//       {openModal && (
-//         <section className="showMoreModal">
-//           <ul>
-//             {showMoreData.map((item) => (
-//               <li
-//                 onClick={() => handleCloseModal(`${item.list}`)}
-//                 key={generateID(15)}
-//               >
-//                 {/* <span className='modalIcon'>icon if any</span> */}
-//                 <span className="modalText">{item.list}</span>
-//               </li>
-//             ))}
-//           </ul>
-//         </section>
-//       )}
-//     </DropdownModalBox>
-//   );
-// };
+DropdownModal.propTypes = {
+  data: PropTypes.array,
+  padding: PropTypes.string,
+  click: PropTypes.func,
+  initial: PropTypes.string,
+  start: PropTypes.bool,
+  end: PropTypes.bool,
+  canClick: PropTypes.bool,
+  weight: PropTypes.string,
+  icon: PropTypes.element,
+  type: PropTypes.oneOf(["showmore"]),
+};
+export default DropdownModal;

@@ -22,6 +22,8 @@ export const Layout = styled.div`
 
   svg {
     font-size: ${({ theme }) => (theme ? theme.fontSizes.small : " 13px")};
+    color: ${({ theme, canClick }) =>
+      canClick ? theme.palette.grey[300] : theme.palette.grey[200]};
   }
   &:hover {
     box-shadow: ${({ canClick }) => canClick && "1px 3px 9px -6px #0003"};
@@ -36,14 +38,9 @@ export const Layout = styled.div`
 
 export const Content = styled.span`
   color: ${({ theme, canClick }) =>
-    !canClick
-      ? theme.palette.grey[200]
-      : theme
-      ? theme.palette.grey[300]
-      : " #777"};
-  font-size: ${({ theme }) => (theme ? theme.fontSizes.small : " 13px")};
-  font-weight: ${({ weight }) => weight || "normal"};
-  opacity: 0.8;
+    canClick ? theme.palette.grey[300] : theme.palette.grey[200]};
+  font-size: ${({ theme }) => (theme ? theme.fontSizes.xsmall : " 13px")};
+  font-weight: ${({ weight }) => weight || "600"};
   padding-right: 10px;
 `;
 
@@ -57,9 +54,14 @@ export const Overlay = styled.div`
   cursor: auto;
 `;
 export const DropdownWrap = styled.section`
-  position: absolute;
-  z-index: 10009;
+  position: relative;
   top: 100%;
+  padding: 0;
+`;
+export const Dropdown = styled.ul`
+  position: absolute;
+  top: 5px;
+  z-index: 10009;
   border: 0;
   right: ${({ end }) => (end ? 0 : "auto")};
   left: ${({ start }) => (start ? 0 : "auto")};
@@ -70,7 +72,7 @@ export const DropdownWrap = styled.section`
   max-width: 250px;
   width: max-content;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-  border-radius: 3px;
+  border-radius: 5px;
   background-clip: padding-box;
   background-color: #fff;
   max-height: 200px;
@@ -107,10 +109,6 @@ export const DropdownWrap = styled.section`
     background: transparent;
   }
 `;
-export const Dropdown = styled.ul`
-  padding: 0;
-  margin: 0;
-`;
 export const ListItems = styled.li`
   list-style: none;
   cursor: pointer;
@@ -132,23 +130,22 @@ export const ListItems = styled.li`
     background-color: ${({ theme }) =>
       theme ? theme.palette.primary.main : "#6464e6"};
     span {
-    color:  ${({ theme }) =>
-        theme
-          ? theme.palette.common.white + " !important"
-          : "#fff !important"};
+      color: ${({ theme }) =>
+        theme ? theme.palette.common.white + " !important" : "#fff !important"};
     }
   }
 
-  .modalIcon {
+  /* .modalIcon {
     width: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+  } */
 `;
 export const Item = styled.span`
   height: 100%;
   flex: 1;
   color: ${({ theme }) => (theme ? theme.palette.grey[300] : "#333")};
   font-size: 13px;
+  font-weight: 550;
 `;

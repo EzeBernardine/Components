@@ -1,23 +1,34 @@
 import React from "react";
-import { DropdownModal } from "./";
+import Dropdown from "./";
 
 export default {
   title: "Dropdown",
-  component: DropdownModal,
+  component: Dropdown,
 };
 
-const Template = (args) => <DropdownModal {...args} />;
-
-export const select = Template.bind({});
+const Template = (args) => <Dropdown {...args} />;
 const data = [{ list: "CRK" }, { list: "Coding" }, { list: "Agriculture" }];
 
+export const select = Template.bind({});
 select.args = {
   initial: " Subjects",
   weight: "bold",
-  //   padding:'0',
+  padding: "7px 15px",
   end: false,
   start: true,
   canClick: true,
-  dropDownData: data,
+  data: data,
+  click: (selected) => console.log(selected),
+};
+
+export const showMore = Template.bind({});
+showMore.args = {
+  weight: "bold",
+  padding: "7px 15px",
+  end: false,
+  start: true,
+  canClick: true,
+  type: "showmore",
+  data: data,
   click: (selected) => console.log(selected),
 };

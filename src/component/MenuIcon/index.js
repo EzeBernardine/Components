@@ -24,7 +24,7 @@ const MenuIcon = ({ click, showMore, color }) => {
 };
 export default MenuIcon;
 
-MenuIcon.prototype = {
+MenuIcon.propTypes = {
   click: PropTypes.func,
   showMore: PropTypes.bool,
 };
