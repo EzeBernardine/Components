@@ -151,7 +151,7 @@ position: relative;
     position: absolute;
     right: 0;
     left: 0;
-    bottom: 20px;
+    bottom: 5px;
     margin: auto;
   }
 }

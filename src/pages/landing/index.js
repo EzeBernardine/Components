@@ -10,31 +10,36 @@ import Modal from "../../component/Modal";
 import Alert from "../../component/Alert";
 import Switch from "../../component/Switch";
 import Tabs from "../../component/Tabs";
-import { DropdownModal, DropdownShowMoreModal } from "../../component/Dropdown";
+import { DropdownModal } from "../../component/Dropdown";
 import { dropdownModal } from "./data";
 
 const Landing = () => {
   const [showMenuDropdown, setShowmenuDropdown] = useState(false);
   const handleDisplayMenu = () => setShowmenuDropdown(!showMenuDropdown);
 
-  //for tab section
-  const [, setTabType] = useState("Profile Update");
+  const [, setTabType] = useState("Profile Update"); //for tab section
 
-  // handles the calling and removal of the modal
-  const [callModal, setCallModal] = useState(false);
-  // the modal ref
-  const modalRef = useRef();
+  const [callModal, setCallModal] = useState(false); // handles the calling and removal of the modal
+
+  const modalRef = useRef(); // the modal ref
   const showModal = () => {
     setCallModal(true);
-    // preventBodyScroll is a useImperativeHandle method in the modal component
-    //  that ensures that the overflow in the body is retured once the modal button is clicked.
-    // This ensures that the only scrollable content on the page becomes the modal content.
+
+    /**
+     * preventBodyScroll is a useImperativeHandle method in the modal component
+     * that ensures that the overflow in the body is retured once the modal button is clicked.
+     * This ensures that the only scrollable content on the page becomes the modal content.
+     */
     modalRef.current.preventBodyScroll();
   };
+  
   const hideModal = () => {
     setCallModal(false);
-    // addBodyScroll is a useImperativeHandle method in the modal component
-    //  that ensures that the overflow in the body is set to hidden once the modal button is clicked.
+
+    /**
+     * addBodyScroll is a useImperativeHandle method in the modal component
+     * that ensures that the overflow in the body is set to hidden once the modal button is clicked.
+     */
     modalRef.current.addBodyScroll();
   };
   return (
@@ -135,7 +140,6 @@ const Landing = () => {
           handleClose={hideModal}
           ref={modalRef}
           noHeader={false}
-         
           title={"Modal Title"}
         >
           {callModal ? (
@@ -156,7 +160,7 @@ const Landing = () => {
             initial=" Subjects"
             selectedWeight="bold"
             selectedColor="#8097B1"
-            dropBk="#fafafb"
+            // dropBk="#fafafb"
             dropCol="#4D4D4C"
             right
             dropDownData={dropdownModal}
@@ -166,19 +170,18 @@ const Landing = () => {
 
         <DividerStyles />
 
-        <div className="flex start">
+        {/* <div className="flex start">
           <h3>Show more dropdown :</h3>
           <DropdownShowMoreModal
             click={(selected) => console.log(selected)}
             showMoreData={dropdownModal}
-            // icon={<OptionIcon />}
             dropHovBk="transparent"
             dropBk="transparent"
             listCol="#8097B1"
             dropCol="#333"
             right
           />
-        </div>
+        </div> */}
 
         <DividerStyles />
         <div className="flex start">
