@@ -1,7 +1,8 @@
 import React from "react";
-import { Container } from "./styles";
-import { AlertIcon, SuccessIcon } from "../../assets/svg";
+import { Container, Close } from "./styles";
+import { AlertIcon, SuccessIcon, CloseIcon } from "../../assets/svg";
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 const Alert = ({ type, duration, children }) => {
   // handle the display of the alert component.
@@ -17,8 +18,9 @@ const Alert = ({ type, duration, children }) => {
       setTimeout(() => {
         setVisible(false);
       }, duration);
+
     return () => timeout && clearTimeout(timeout); //Clears the setTimeout to avoid errors
-  });
+  }, [children, duration]);
 
   return (
     <>
@@ -29,6 +31,13 @@ const Alert = ({ type, duration, children }) => {
           ) : (
             <AlertIcon width="15px" height="15px" />
           )}
+
+          {type === "warning" ? (
+            <Close onClick={() => setVisible(false)}>
+              <CloseIcon width="13px" height="13px" />
+            </Close>
+          ) : null}
+
           {children}
         </Container>
       ) : null}
@@ -36,4 +45,9 @@ const Alert = ({ type, duration, children }) => {
   );
 };
 
+Alert.prototype = {
+  type: PropTypes.oneOf(["error", "success", "warning"]),
+  children: PropTypes.elementType,
+  duration: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
+};
 export default Alert;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Wrapper,
   Layout,
@@ -20,18 +20,13 @@ import { truncate } from "../../lib/factory.lib";
 
 export const DropdownModal = ({
   dropDownData,
-  dropBk,
-  dropHovBk,
-  dropCol,
+  padding,
   click,
   initial,
-  left,
-  right,
-  maxHeight,
+  start,
+  end,
   canClick = true,
-  selectedSize,
-  selectedWeight,
-  selectedColor,
+  weight,
 }) => {
   const [openModal, setOpenModal] = useState(false);
   const [selected, setContent] = useState(initial || "Select");
@@ -43,20 +38,15 @@ export const DropdownModal = ({
   };
 
   return (
-    <Wrapper
-      // dropBk={dropBk}
-      dropHovBk={dropHovBk}
-      dropCol={dropCol}
-      left={left}
-      right={right}
-      maxHeight={maxHeight}
-      selectedSize={selectedSize}
-      selectedWeight={selectedWeight}
-      selectedColor={selectedColor}
-      canClick={canClick}
-    >
-      <Layout onClick={() => canClick && setOpenModal(!openModal)}>
-        <Content>{truncate(selected, 20) || "Select"}</Content>
+    <Wrapper>
+      <Layout
+        onClick={() => canClick && setOpenModal(!openModal)}
+        canClick={canClick}
+        padding={padding}
+      >
+        <Content canClick={canClick} weight={weight}>
+          {truncate(selected, 20) || "Select"}
+        </Content>
         <UpArrow />
       </Layout>
 
@@ -65,7 +55,7 @@ export const DropdownModal = ({
       ) : null}
 
       {openModal && (
-        <DropdownWrap>
+        <DropdownWrap end={end} start={start}>
           <Dropdown>
             {dropDownData.map((item) => (
               <ListItems
@@ -90,7 +80,7 @@ export const DropdownModal = ({
 //   listCol,
 //   icon,
 //   click,
-//   right,
+//   end,
 // }) => {
 //   const [openModal, setOpenModal] = useState(false);
 
@@ -105,7 +95,7 @@ export const DropdownModal = ({
 //       dropHovBk={dropHovBk}
 //       dropCol={dropCol}
 //       listCol={listCol}
-//       right={right}
+//       end={end}
 //     >
 //       <div className="click" onClick={() => setOpenModal(!openModal)}>
 //         {icon ? icon : <OptionIcon />}

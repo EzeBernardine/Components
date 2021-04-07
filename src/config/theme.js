@@ -9,7 +9,7 @@ const palette = {
     white,
   },
   primary: {
-    main: "orange",
+    main: "#6464e6",
     light: "#146DD6",
     contrastText: white,
   },
@@ -19,11 +19,18 @@ const palette = {
     contrastText: white,
   },
   success: {
-    main: "#2bac20",
-    light: "#80fb765e",
+    main: "#3bbe2f",
+    light: "#5cff4f61",
+    contrastText: white,
+  },
+  warning: {
+    main: "#c0c036",
+    light: "#e7e77f73",
     contrastText: white,
   },
   grey: {
+    0: "#FAFAFA",
+    10: "#EEE",
     100: "#EAEAEA",
     200: "#C9C5C5",
     300: "#888",

@@ -4,34 +4,29 @@ export const Wrapper = styled("div")`
   position: relative;
   width: max-content;
   min-width: max-content;
+  font-family: "Fira Sans", sans-serif;
 `;
 
 export const Layout = styled.div`
-  background: ${({ theme }) => theme.palette.grey[100] || "#eff0f5"};
+  background: ${({ theme }) => theme.palette.grey[0] || "#eff0f5"};
   cursor: ${({ canClick }) =>
     canClick === undefined ? "pointer" : canClick ? "pointer" : "not-allowed"};
-  padding: ${({ dropBk }) =>
-    !!dropBk
-      ? dropBk === "transparent"
-        ? "5px 5px"
-        : " 5px 13px"
-      : "5px 13px"};
+  padding: ${({ padding }) => (padding ? padding : "5px 13px")};
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #777;
   transition: 250ms ease-in-out;
-  border: 1px solid #e3e5ea;
+  border: ${({ theme }) => "1px solid " + theme.palette.grey[10]};
 
   svg {
-    font-size: ${({ selectedSize }) => selectedSize || " 13px"};
+    font-size: ${({ theme }) => (theme ? theme.fontSizes.small : " 13px")};
   }
   &:hover {
-    border: 1px solid #dbdbdb;
     box-shadow: ${({ canClick }) => canClick && "1px 3px 9px -6px #0003"};
-    background: ${({ dropHovBk, canClick }) =>
-      !canClick ? "#dcdde1" : dropHovBk || "#e3e3e3"};
+    background: ${({ theme, canClick }) =>
+      !canClick ? "#dcdde1" : theme ? theme.palette.grey[0] : "#e3e3e3"};
     color: ${({ dropCol }) => dropCol && dropCol};
     & > span {
       opacity: 1;
@@ -40,10 +35,14 @@ export const Layout = styled.div`
 `;
 
 export const Content = styled.span`
-  color: ${({ selectedColor, canClick }) =>
-    !canClick ? "#d0cece" : selectedColor ? selectedColor : " #777"};
-  font-size: ${({ selectedSize }) => selectedSize || " 13px"};
-  font-weight: ${({ selectedWeight }) => selectedWeight || "auto"};
+  color: ${({ theme, canClick }) =>
+    !canClick
+      ? theme.palette.grey[200]
+      : theme
+      ? theme.palette.grey[300]
+      : " #777"};
+  font-size: ${({ theme }) => (theme ? theme.fontSizes.small : " 13px")};
+  font-weight: ${({ weight }) => weight || "normal"};
   opacity: 0.8;
   padding-right: 10px;
 `;
@@ -62,8 +61,8 @@ export const DropdownWrap = styled.section`
   z-index: 10009;
   top: 100%;
   border: 0;
-  right: ${({ right }) => (right ? 0 : "auto")};
-  left: ${({ left }) => (left ? 0 : "auto")};
+  right: ${({ end }) => (end ? 0 : "auto")};
+  left: ${({ start }) => (start ? 0 : "auto")};
   margin: 2px auto 0;
   padding: 5px 0;
   font-size: 14px;
@@ -74,7 +73,7 @@ export const DropdownWrap = styled.section`
   border-radius: 3px;
   background-clip: padding-box;
   background-color: #fff;
-  max-height: ${({ maxHeight }) => maxHeight || "200px"};
+  max-height: 200px;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-color: #e3e3e3 transparent;
@@ -125,16 +124,18 @@ export const ListItems = styled.li`
   font-size: 13px;
   min-height: unset;
   display: flex;
-  padding: 10px 20px span {
-    color: ${({ listCol }) => listCol || "#333"};
-    font-size: 13px;
-  }
+  padding: 5px 15px;
+
   &:hover {
     box-shadow: 0 12px 20px -10px rgba(156, 39, 176, 0.28),
       0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(156, 39, 176, 0.2);
-    background-color: #6464e6;
+    background-color: ${({ theme }) =>
+      theme ? theme.palette.primary.main : "#6464e6"};
     span {
-      color: #fff !important;
+    color:  ${({ theme }) =>
+        theme
+          ? theme.palette.common.white + " !important"
+          : "#fff !important"};
     }
   }
 
@@ -148,7 +149,6 @@ export const ListItems = styled.li`
 export const Item = styled.span`
   height: 100%;
   flex: 1;
+  color: ${({ theme }) => (theme ? theme.palette.grey[300] : "#333")};
+  font-size: 13px;
 `;
-// export const Overlay = styled.div`
-
-// `
