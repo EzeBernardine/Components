@@ -7,7 +7,7 @@
 import React, { useState } from "react";
 import { Container, Main, Button, Input, Ball, Overlay } from "./styles";
 
-const Switch = ({ click, initialState, color }) => {
+const Switch = ({ click, initialState }) => {
   const [switched, setSwitched] = useState(initialState || null);
 
   const handleSwitch = (e) => {
@@ -16,19 +16,19 @@ const Switch = ({ click, initialState, color }) => {
   };
 
   return (
-    <Container switched={switched} color={color}>
+    <Container>
       <Main>
-        <Button>
+        <Button switched={switched}>
           <span>
             <Input
               type="checkbox"
               onClick={handleSwitch}
               defaultChecked={switched}
             />
-            <Ball className="switch-ball" />
+            <Ball className="switch-ball" switched={switched} />
           </span>
         </Button>
-        <Overlay  switched={switched} />
+        <Overlay switched={switched} />
       </Main>
     </Container>
   );

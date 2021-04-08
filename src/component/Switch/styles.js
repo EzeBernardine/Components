@@ -1,4 +1,4 @@
-import styled, { keyframes, css } from "styled-components";
+import styled from "styled-components";
 
 export const Container = styled("div")`
   width: 42px;
@@ -18,31 +18,35 @@ export const Main = styled("div")`
   left: 0;
   margin: auto;
 `;
-export const Button = styled("div")`
-  /* position: relative;
-  border: none; */
-
+export const Button = styled("button")`
+  position: relative;
+  border: none;
+  top: -7.5px;
   width: 40px;
+  transition: all 0.5s ease;
   margin: auto;
   height: 15px;
   border-radius: 20px;
-  background: ${({ switched, color }) =>
-    switched ? (color ? color : "#ff6600") : "#6a666694"};
+  background: ${({ switched, theme }) =>
+    switched ? (theme ? theme.palette.primary.main : "#ff6600") : "#6a666694"};
 
   &:hover .switch-ball {
-    box-shadow: ${({ switched, color }) =>
+    box-shadow: ${({ switched, theme }) =>
       switched
-        ? color
-          ? "0 1px 3px 1px rgba(0, 0, 0, 0.54), 00 1px 0px 10px " + color + 36
+        ? theme
+          ? "0 1px 3px 1px rgba(0, 0, 0, 0.54), 00 1px 0px 10px " +
+            theme.palette.primary.main +
+            36
           : "0 1px 3px 1px rgba(0, 0, 0, 0.54), 00 1px 0px 10px #ff660036"
         : " 0 1px 3px 1px rgba(0, 0, 0, 0.54), 00 1px 0px 10px  #6a66662b"};
   }
-  transition: all 0.5s ease;
   &:focus .switch-ball,
   &:active .switch-ball {
-    box-shadow: ${({ color }) =>
-      color
-        ? `  0 1px 3px 1px rgba(0, 0, 0, 0.54), 00 1px 1px 10px ${color + "8a"}`
+    box-shadow: ${({ theme }) =>
+      theme
+        ? `  0 1px 3px 1px rgba(0, 0, 0, 0.54), 00 1px 1px 10px ${
+            theme.palette.primary.main + "8a"
+          }`
         : " 0 1px 3px 1px rgba(0, 0, 0, 0.54), 00 1px 1px 10px #ff66008a"};
   }
 `;
@@ -68,40 +72,38 @@ export const Ball = styled("span")`
   position: absolute;
   top: 0px;
   bottom: 0;
-  right: ${(props) => (props.switched ? 0 : "auto")};
-
-  left: ${(props) => (!props.switched ? 0 : "auto")};
+  right: ${({ switched }) => (switched ? 0 : "auto")};
+  left: ${({ switched }) => (!switched ? 0 : "auto")};
   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
-  border: ${({ switched, color }) =>
+  border: ${({ switched, theme }) =>
     switched
-      ? color
-        ? `1px solid ${color}`
+      ? theme
+        ? `1px solid ${theme.palette.primary.main}`
         : "1px solid #ff6600"
       : "1px solid  #6a666694"};
   margin: auto;
 `;
 
-// ------------------keyframes--------------------/
-const forward = keyframes`
-  0% {
-    transform: scale(0.5);
-  }
-  100% {
-    transform: scale(1);
-    background: transparent;
-  }
-`;
-const back = keyframes`
-   0% {
-    transform: scale(0.5);
-  }
-  100% {
-    transform: scale(1);
-    background: transparent;
-  }
-`;
-
 export const Overlay = styled("div")`
+  @keyframes yeah {
+    0% {
+      transform: scale(0.5);
+    }
+    100% {
+      transform: scale(1);
+      background: transparent;
+    }
+  }
+  @keyframes back {
+    0% {
+      transform: scale(0.5);
+    }
+    100% {
+      transform: scale(1);
+      background: transparent;
+    }
+  }
+
   background: #6a666654;
   position: absolute;
   z-index: 11;
@@ -109,18 +111,10 @@ export const Overlay = styled("div")`
   width: 38px;
   border-radius: 50%;
   top: -11px;
-  animation: ${(props) =>
-    props.switched
-      ? css`
-          ${forward} .5s ease-out forwards
-        `
-      : css`
-          ${back} .5s ease-out forwards
-        `};
-  right: ${(props) => (props.switched ? " -9px" : "auto")};
-  left: ${(props) => (!props.switched ? " -9px" : "auto")};
+  animation: ${({ switched }) =>
+    switched ? " yeah .5s ease-out forwards" : "back .5s ease-out forwards"};
+  right: ${({ switched }) => (switched ? " -9px" : "auto")};
+  left: ${({ switched }) => (!switched ? " -9px" : "auto")};
   bottom: 0;
   transition: all 0.7s ease;
 `;
-// export const Container = styled("div")`
-// ` ;

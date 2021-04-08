@@ -5,10 +5,19 @@
  */
 
 import React, { useState } from "react";
-import { CustomTableMain, TableData, Paginator } from "./styles";
+import {
+  Container,
+  TableData,
+  Paginator,
+  OverFlowScrollBar,
+  TableHead,
+  Table,
+  TableBodyRow,
+  TableHeadData,
+  TableBodyData,
+} from "./styles";
 import { generateID } from "../../lib/generateID";
 import PropTypes from "prop-types";
-import { OverFlowScrollBar } from "../OverflowScroll/styles";
 import Pagination from "../Paginator";
 
 const CustomTable = ({
@@ -38,9 +47,9 @@ const CustomTable = ({
     delete __data._id;
 
     return (
-      <tr key={generateID(17)} onClick={() => rowClick(data)}>
+      <TableBodyRow key={generateID(17)} onClick={() => rowClick(data)}>
         {Object.values(__data).map((item, i) => (
-          <TableData
+          <TableBodyData
             theadColor={theadColor}
             tbodyColor={tbodyColor}
             head={(tableHead[i] && tableHead[i].replace(/'/g, "")) || ""}
@@ -53,15 +62,15 @@ const CustomTable = ({
             key={generateID(14)}
           >
             {item}
-          </TableData>
+          </TableBodyData>
         ))}
-      </tr>
+      </TableBodyRow>
     );
   };
   return (
     <>
       {tableBody.length !== 0 ? (
-        <CustomTableMain
+        <Container
           theadColor={theadColor}
           theadBgColor={theadBgColor}
           bottomGap={bottomGap}
@@ -70,21 +79,21 @@ const CustomTable = ({
           paginator={paginator}
         >
           <OverFlowScrollBar className="container">
-            <table>
-              <thead>
-                <tr>
+            <Table>
+              <TableHead>
+                <TableHeadData>
                   {tableHead.map((head, i) => (
                     <th key={generateID(11)}>{head.toUpperCase()}</th>
                   ))}
-                </tr>
-              </thead>
+                </TableHeadData>
+              </TableHead>
 
               <tbody>
                 {paginator
                   ? pageOfItems.map((data, idx) => returnTableRow(data))
                   : tableBody.map((data, idx) => returnTableRow(data))}
               </tbody>
-            </table>
+            </Table>
           </OverFlowScrollBar>
 
           <Paginator className="paginator" paginator={paginator}>
@@ -96,7 +105,7 @@ const CustomTable = ({
               firstLast={firstLast || null}
             />
           </Paginator>
-        </CustomTableMain>
+        </Container>
       ) : (
         <p>"No Data to display"</p>
       )}
