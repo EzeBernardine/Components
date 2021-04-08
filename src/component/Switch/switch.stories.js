@@ -13,9 +13,9 @@ export default {
 
 const Template = (args) => <Switch {...args} />;
 
-export const CustomSwitch = Template.bind({});
+export const _Switch = Template.bind({});
 
-CustomSwitch.args = {
+_Switch.args = {
   initialState: true,
   color: "#de8430",
   click: (checked) => console.log(checked),

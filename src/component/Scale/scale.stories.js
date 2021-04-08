@@ -1,10 +1,6 @@
-// YourComponent.stories.js
-
 import React from "react";
 
 import { RoundScale, BarScale } from "./index";
-
-//👇 This default export determines where your story goes in the story list
 
 export default {
   title: "Scale",

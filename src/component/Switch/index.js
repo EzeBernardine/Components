@@ -5,7 +5,7 @@
  */
 
 import React, { useState } from "react";
-import { SwitchWrap } from "./styles";
+import { Container, Main, Button, Input, Ball, Overlay } from "./styles";
 
 const Switch = ({ click, initialState, color }) => {
   const [switched, setSwitched] = useState(initialState || null);
@@ -16,22 +16,21 @@ const Switch = ({ click, initialState, color }) => {
   };
 
   return (
-    <SwitchWrap switched={switched} color={color}>
-      <div className="switch-main">
-        <div className="switch-btn">
+    <Container switched={switched} color={color}>
+      <Main>
+        <Button>
           <span>
-            <input
+            <Input
               type="checkbox"
-              className="switch-check"
               onClick={handleSwitch}
               defaultChecked={switched}
             />
-            <span className="switch-ball" />
+            <Ball className="switch-ball" />
           </span>
-        </div>
-        <div className="switch-overlay" />
-      </div>
-    </SwitchWrap>
+        </Button>
+        <Overlay  switched={switched} />
+      </Main>
+    </Container>
   );
 };
 

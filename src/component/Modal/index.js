@@ -15,7 +15,7 @@ import {
   Body,
   Overlay,
   Content,
-  IconWrap,
+  CloseIconWrap,
 } from "./styles";
 import PropTypes from "prop-types";
 import { CloseIcon } from "../../assets/svg";
@@ -66,9 +66,9 @@ const Modal = forwardRef(
                   {noHeader ? null : <Title>{title.toUpperCase()}</Title>}
                 </Header>
 
-                <IconWrap onClick={() => close()}>
+                <CloseIconWrap onClick={() => close()}>
                   <CloseIcon width="15px" height="15px" />
-                </IconWrap>
+                </CloseIconWrap>
               </HeaderWrap>
 
               <OverFlowScrollBar>

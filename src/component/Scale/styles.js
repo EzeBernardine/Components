@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const RoundScaleContainer = styled.div`
+  font-family: "Fira Sans", sans-serif;
   height: ${({ size, half }) =>
     half ? (size ? size / 2 + "px" : "75px") : "auto"};
   width: ${({ size, half }) =>
@@ -8,7 +9,7 @@ export const RoundScaleContainer = styled.div`
   overflow: hidden;
 `;
 
-export const Scale = styled.div`
+export const RoundScaleScale = styled.div`
   width: ${({ size }) => (size ? size + "px" : "150px")};
   transform: ${({ half }) => (half ? "rotate(-90deg)" : "rotate(0deg)")};
   height: ${({ size }) => (size ? size + "px" : "150px")};
@@ -75,7 +76,7 @@ export const Scale = styled.div`
         } 50%, ${color || "chartreuse"} 50%)`
       : "none"};
 `;
-export const Cover = styled.div`
+export const RoundScaleCover = styled.div`
   width: ${({ thickness }) => thickness + "%" || "95%"};
   height: ${({ thickness }) => thickness + "%" || "95%"};
   background: ${({ centerColor = "black" }) => centerColor};
@@ -88,27 +89,28 @@ export const Cover = styled.div`
   flex-direction: column;
   transform: ${({ half }) => (half ? "rotate(90deg)" : "rotate(0deg)")};
 `;
-export const TextWrap = styled.div`
+export const RoundScaleTextWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin-bottom: ${({ half }) => (half ? "50%" : 0)};
 `;
-export const Range = styled.h5`
+export const RoundScaleRange = styled.h5`
   font-weight: 600;
   margin: 0 0 10px;
   color: ${({ theme }) => (theme ? theme.palette.common.white : "red")};
   display: ${({ noText }) => (noText ? "none" : "block")};
 `;
-export const Name = styled.small`
+export const RoundScaleName = styled.small`
   display: ${({ noText }) => (noText ? "none" : "block")};
   text-align: center;
   color: ${({ theme }) => (theme ? theme.palette.common.white : "red")};
   font-weight: 600;
 `;
-
+// --------------------------divider-------------------
 export const BarScaleContainer = styled.div`
+  font-family: "Fira Sans", sans-serif;
   height: ${(props) => (props ? props.height + "px" : "300px")};
   width: ${(props) => (props ? props.width + "px" : "300px")};
   display: flex;

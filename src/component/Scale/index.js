@@ -7,11 +7,11 @@ import React from "react";
 import {
   RoundScaleContainer,
   BarScaleContainer,
-  Scale,
-  Cover,
-  TextWrap,
-  Range,
-  Name,
+  RoundScaleScale,
+  RoundScaleCover,
+  RoundScaleTextWrap,
+  RoundScaleRange,
+  RoundScaleName,
   BarScaleName,
   BarScaleRange,
 } from "./styles";
@@ -29,7 +29,7 @@ export const RoundScale = ({
 }) => {
   return (
     <RoundScaleContainer half={half} size={size}>
-      <Scale
+      <RoundScaleScale
         baseColor={baseColor}
         half={half}
         size={size}
@@ -37,18 +37,20 @@ export const RoundScale = ({
         color={color}
         centerColor={centerColor}
       >
-        <Cover
+        <RoundScaleCover
           thickness={thickness}
           centerColor={centerColor}
           half={half}
           noText={noText}
         >
-          <TextWrap half={half}>
-            <Range noText={noText}> {value ? value : scale.range}</Range>
-            <Name noText={noText}>{scale.name}</Name>
-          </TextWrap>
-        </Cover>
-      </Scale>
+          <RoundScaleTextWrap half={half}>
+            <RoundScaleRange noText={noText}>
+              {value ? value : scale.range}
+            </RoundScaleRange>
+            <RoundScaleName noText={noText}>{scale.name}</RoundScaleName>
+          </RoundScaleTextWrap>
+        </RoundScaleCover>
+      </RoundScaleScale>
     </RoundScaleContainer>
   );
 };

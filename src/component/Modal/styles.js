@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled("div")`
+font-family: "Fira Sans", sans-serif;
   position: fixed;
   top: 0;
   left: 0;
@@ -35,7 +36,7 @@ export const Main = styled("main")`
 `;
 
 export const ModalWrap = styled("div")`
-  position: relatBody Body Body Body Bodyive;
+  position: relative;
   max-width: 500px;
   width: 100%;
   max-height: 80vh;
@@ -83,18 +84,18 @@ export const Body = styled("div")`
   width: 100%;
 `;
 
-export const IconWrap = styled("span")`
+export const CloseIconWrap = styled("span")`
   position: relative;
   right: 30px;
   float: right;
-  top: 20px;
+  top: 15px;
   cursor: pointer;
   color: ${({ theme }) => theme.palette.grey[200]};
 `;
 export const Content = styled("div")`
   overflow-y: auto;
   overflow-x: hidden;
-  width: 100%;
+  width: auto;
   max-height: 70vh;
   padding: 30px;
   color: ${({ theme }) => theme.palette.grey[300]};
