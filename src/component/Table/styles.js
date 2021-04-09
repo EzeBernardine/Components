@@ -40,8 +40,6 @@ export const OverFlowScrollBar = styled("div")`
   }
 `;
 
-
-
 export const Paginator = styled("div")`
   background: white;
   padding: 1em 5px;
@@ -59,7 +57,8 @@ export const Table = styled.table`
 `;
 // --------------Table head ------------------
 export const TableHead = styled.thead`
-  background: ${({ theme }) => (theme ? theme.palette.primary.main : "red")};
+  background: ${({ theme, headBkColor }) =>
+    headBkColor ? headBkColor : theme ? theme.palette.primary.main : "red"};
   cursor: default;
   @media (max-width: 900px) {
     display: none;
@@ -71,7 +70,8 @@ export const TableHeadRow = styled.tr`
 `;
 export const TableHeadData = styled.th`
   text-align: start;
-  color: ${({ theme }) => (theme ? theme.palette.common.white : "#033")};
+  color: ${({ theme, headColor }) =>
+    headColor ? headColor : theme ? theme.palette.common.white : "red"};
   font-size: 16px;
   padding: 0.8em 0 0.8rem 1.8rem;
   min-width: 160px;
@@ -80,17 +80,15 @@ export const TableHeadData = styled.th`
   }
 `;
 
-
-
 // --------------Table body ------------------
 export const TableBodyRow = styled.tr`
   background: ${({ theme }) => (theme ? theme.palette.common.white : "#fff")};
-  cursor: pointer;
+  cursor: ${({ moreDetail }) =>
+    moreDetail && moreDetail.length > 0 ? "pointer" : "default"};
   border: none;
   border-bottom: ${({ gap }) =>
     gap ? `${gap} solid   #fff` : "5px solid  #fff "};
   &:hover {
-    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.27);
     background: #d2ccc621;
   }
   @media (max-width: 900px) {
@@ -102,17 +100,16 @@ export const TableBodyData = styled.td`
   padding: 1.2rem 1.8rem;
   font-weight: 400;
   font-size: 14px;
-  color: ${({ theme }) => (theme ? theme.palette.grey[300] : "#767675")};
+  color: ${({ theme, bodyColor }) =>
+    bodyColor ? bodyColor : theme ? theme.palette.grey[300] : "#767675"};
   @media (max-width: 1200px) {
     min-width: auto;
   }
   @media (max-width: 900px) {
     padding: 0.8rem 1.8rem;
     position: relative;
-    width: 100%;
     display: flex;
     justify-content: space-between;
-    min-width: 100%;
     align-items: flex-start;
     text-align: end;
     &:before {
@@ -138,13 +135,10 @@ export const TableBodyData = styled.td`
   }
 `;
 
-
 // --------------ShowMore Table body ------------------
 export const TableRowShowMore = styled.tr`
   cursor: auto;
   border: none;
-  box-shadow: inset 0 0 7px 8px rgba(105, 57, 33, 0.05);
-  background: linear-gradient(#ee6c2e21, #c6927e17);
+  border-bottom: ${({ gap }) =>
+    gap ? `${gap} solid   #fff` : "5px solid  #fff "};
 `;
-
-

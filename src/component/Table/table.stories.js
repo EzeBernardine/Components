@@ -35,12 +35,12 @@ const tableContent = [
   },
 ];
 const moreDetail = [
-  <span>Payment type</span>,
-  <span>Payment type</span>,
-  <span>Payment type</span>,
-  <span>Payment type</span>,
-  <span>Payment type</span>,
-  <span>Payment type</span>,
+  <div>You can style this as you want it</div>,
+  <div>Payment oops</div>,
+  <div>Anything</div>,
+  <div>Hello world</div>,
+  <div>Payment type</div>,
+  <div>Payment type</div>,
 ];
 
 export default {
@@ -57,10 +57,13 @@ _Table.args = {
   tableHead: tableHead,
   tableBody: tableContent,
   moreDetail: moreDetail,
-  theadColor: "red",
-  rowClick: (data) => console.log(data, "the row"),
-  tbodyColor: "#252733",
   paginator: true,
   pageSize: 5,
   prevNext: true,
+
+  rowClick: (data, moreData) => console.log(data, moreData, "the row"),
+
+  headBkColor: "purple",
+  headColor: "white",
+  bodyColor: "grey",
 };

@@ -19,8 +19,11 @@ const CustomTable = ({
   tableBody,
   tableHead,
   moreDetail,
-
   gap,
+  headBkColor,
+  headColor,
+  bodyColor,
+  rowClick,
   paginator,
   pageSize,
   firstLast,
@@ -33,9 +36,12 @@ const CustomTable = ({
   const onChangePage = (items) => setPageOfItems(items);
 
   //determines which tableRowShowMoreData will be displayed.
-  const handleOpenTable = (idx) =>
+  const handleOpenTable = (idx, rowData, moreData) => {
     isOpen === idx ? setIsOpen(-1) : setIsOpen(idx);
-
+    //gives you access to the table data outside this file
+    //optional
+    rowClick(rowData, moreData);
+  };
   const returnTableRow = (data, idx, isOpen) => {
     let index = idx + 1;
     let __data = { ...data };
@@ -44,23 +50,28 @@ const CustomTable = ({
 
     return (
       <React.Fragment key={generateID(17)}>
-        <TableBodyRow gap={gap} onClick={() => handleOpenTable(index)}>
+        <TableBodyRow
+          gap={gap} //calculates for spaces between tablerows
+          moreDetail={moreDetail} //used to determines cursor type
+          onClick={() =>
+            handleOpenTable(index, __data, moreDetail && moreDetail[idx])
+          }
+        >
           {Object.values(__data).map((item, i) => (
             <TableBodyData
               // need on mobile screen for displaying each tablehead
               head={(tableHead[i] && tableHead[i].replace(/'/g, "")) || ""}
               key={generateID(14)}
+              bodyColor={bodyColor}
             >
               {item}
             </TableBodyData>
           ))}
         </TableBodyRow>
         {moreDetail && isOpen === index ? (
-          <TableRowShowMore>
+          <TableRowShowMore gap={gap}>
             {/* this ensures  colSpan is the length of the number of columns in the table*/}
-            <TableBodyData colSpan={Object.values(__data).length}>
-              {moreDetail[idx].props.children}
-            </TableBodyData>
+            <td colSpan={Object.values(__data).length}>{moreDetail[idx]}</td>
           </TableRowShowMore>
         ) : null}
       </React.Fragment>
@@ -73,10 +84,10 @@ const CustomTable = ({
         <Container paginator={paginator}>
           <OverFlowScrollBar>
             <Table>
-              <TableHead>
+              <TableHead headBkColor={headBkColor}>
                 <TableHeadRow>
                   {tableHead.map((head, i) => (
-                    <TableHeadData key={generateID(11)}>
+                    <TableHeadData key={generateID(11)} headColor={headColor}>
                       {head.toUpperCase()}
                     </TableHeadData>
                   ))}
@@ -118,6 +129,9 @@ CustomTable.propTypes = {
   moreDetail: PropTypes.array.isRequired,
   rowClick: PropTypes.func,
   gap: PropTypes.string,
+  headBkColor: PropTypes.string,
+  headColor: PropTypes.string,
+  bodyColor: PropTypes.string,
   pageSize: PropTypes.number,
   firstLast: PropTypes.any,
   paginator: PropTypes.any,
