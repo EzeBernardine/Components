@@ -9,11 +9,6 @@ export const TableBodyData = styled.td`
   padding: 1.2rem 1.8rem;
   font-weight: 400;
   font-size: 0.8rem;
-  span {
-    font-size: 0.8rem;
-    color: ${({ tbodyColor }) => tbodyColor || "#767675"};
-  }
-
   color: ${({ tbodyColor }) => tbodyColor || "#767675"};
   @media (max-width: 1200px) {
     min-width: auto;
