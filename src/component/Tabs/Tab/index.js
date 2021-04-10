@@ -6,7 +6,6 @@ const Tab = ({
   activeTab,
   label,
   onClick,
-
   nonActiveColor,
   full,
   activeColor,

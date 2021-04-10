@@ -6,7 +6,8 @@ export const TabList = styled("ol")`
   padding-left: 0;
   display: flex;
   width: 100%;
-  background-color: ${({ bgColor }) => (bgColor ? bgColor : "white")};
+  background-color: ${({ bgColor, theme }) =>
+    bgColor ? bgColor : theme ? theme.palette.primary.main : "white"};
   height: auto;
   align-items: center;
   justify-content: flex-start;
@@ -30,8 +31,12 @@ export const ListItem = styled("li")`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${({ nonActiveColor }) =>
-    nonActiveColor ? nonActiveColor : "#b9a694"};
+  color: ${({ nonActiveColor, theme }) =>
+    nonActiveColor
+      ? nonActiveColor
+      : theme
+      ? theme.palette.grey[100]
+      : "#b9a694"};
   cursor: pointer;
   border-bottom: 2px solid transparent;
   margin: 0 10px;
@@ -54,10 +59,19 @@ export const ListItem = styled("li")`
     }
   }
   &.tab-list-active {
-    color: ${({ activeColor }) => (activeColor ? activeColor : "#de8430")};
+    color: ${({ activeColor, theme }) =>
+      activeColor
+        ? activeColor
+        : theme
+        ? theme.palette.common.white
+        : "#de8430"};
     ::before {
-      background: ${({ activeColor }) =>
-        activeColor ? activeColor : "#f1f1f1"};
+      background: ${({ activeColor, theme }) =>
+        activeColor
+          ? activeColor
+          : theme
+          ? theme.palette.primary.main
+          : "#de8430"};
       position: absolute;
       content: "";
       width: 100%;
@@ -109,4 +123,7 @@ export const Animate = styled("div")`
     right: 50%;
     animation: left 0.8s ease-in-out 1 forwards;
   }
+`;
+export const TabContent = styled("div")`
+  padding: 20px 0;
 `;

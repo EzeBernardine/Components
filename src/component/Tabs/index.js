@@ -6,7 +6,7 @@
 
 import React, { useState } from "react";
 import propTypes from "prop-types";
-import { TabWrapper, TabList } from "./styles";
+import { TabWrapper, TabList, TabContent } from "./styles";
 import Tab from "./Tab";
 import { generateID } from "../../lib/generateID";
 
@@ -42,12 +42,12 @@ const Tabs = ({
           );
         })}
       </TabList>
-      <div>
+      <TabContent>
         {children.map((child) => {
           if (child.props.label !== activeTab) return undefined;
           return child.props.children;
         })}
-      </div>
+      </TabContent>
     </TabWrapper>
   );
 };
