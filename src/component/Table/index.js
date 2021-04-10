@@ -50,6 +50,7 @@ const CustomTable = ({
 
     return (
       <React.Fragment key={generateID(17)}>
+        {/* Normal table row */}
         <TableBodyRow
           gap={gap} //calculates for spaces between tablerows
           moreDetail={moreDetail} //used to determines cursor type
@@ -68,6 +69,8 @@ const CustomTable = ({
             </TableBodyData>
           ))}
         </TableBodyRow>
+
+        {/* When the is more table data to be displayed when a table row is clicked */}
         {moreDetail && isOpen === index ? (
           <TableRowShowMore gap={gap}>
             {/* this ensures  colSpan is the length of the number of columns in the table*/}
