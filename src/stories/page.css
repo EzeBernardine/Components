@@ -1,4 +1,4 @@
-section {
+/* section {
   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 24px;
@@ -29,9 +29,7 @@ ul {
   margin: 1em 0;
 }
 
-li {
-  margin-bottom: 8px;
-}
+
 
 .tip {
   display: inline-block;
@@ -64,4 +62,4 @@ li {
 
 .tip-wrapper svg path {
   fill: #1ea7fd;
-}
+} */

@@ -1,60 +1,12 @@
 import styled from "styled-components";
 
-export const TabWrapper = styled("div")`
-  .tab-list-active {
-    position: relative;
-    color: ${({ activeColor }) => (activeColor ? activeColor : "#de8430")};
-    border-bottom: ${({ activeColor }) =>
-      activeColor ? `2px solid ${activeColor}` : "2px solid #de8430"};
-    :hover {
-      border-bottom: ${({ activeColor }) =>
-        activeColor ? `2px solid ${activeColor}` : "2px solid #de8430"};
-    }
-    ::after {
-      content: "";
-      width: 50%;
-      height: 100%;
-      border-radius: 0 4px 4px 0;
-      background: #fafafa;
-      opacity: 0.2;
-      position: absolute;
-      left: 50%;
-      animation: left 0.8s ease-in-out 1 alternate forwards;
-    }
-    ::before {
-      content: "";
-      width: 50%;
-      height: 100%;
-      border-radius: 4px 0 0 4px;
-      background: #fafafa;
-      opacity: 0.2;
-      position: absolute;
-      right: 50%;
-      animation: left 0.8s ease-in-out 1 forwards;
-    }
-    @keyframes left {
-      0% {
-        width: 0;
-        opacity: 0;
-      }
-      50% {
-        width: 50%;
-        opacity: 0.4;
-      }
-      100% {
-        width: 50%;
-        opacity: 0;
-      }
-    }
-  }
-`;
+export const TabWrapper = styled("div")``;
 
 export const TabList = styled("ol")`
   padding-left: 0;
   display: flex;
   width: 100%;
-  border-color: white;
-  border-radius: 4px;
+  background-color: ${({ bgColor }) => (bgColor ? bgColor : "white")};
   height: auto;
   align-items: center;
   justify-content: flex-start;
@@ -62,16 +14,18 @@ export const TabList = styled("ol")`
   overflow-x: auto;
   scrollbar-color: #e3e3e3 transparent;
   scrollbar-width: none;
+  border-bottom: 2px solid #f1f1f1;
 `;
 export const ListItem = styled("li")`
+  position: relative;
   list-style: none;
-  padding: 0.8rem 0.55rem;
-  flex: 1;
+  padding: 0.8rem 0;
+  flex: ${({ full }) => full && 1};
   font-size: 16px;
   font-weight: bold;
   letter-spacing: 0.05rem;
   height: 100%;
-  background-color: ${({ bgColor }) => (bgColor ? bgColor : "white")};
+  background-color: transparent;
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -80,20 +34,79 @@ export const ListItem = styled("li")`
     nonActiveColor ? nonActiveColor : "#b9a694"};
   cursor: pointer;
   border-bottom: 2px solid transparent;
-  &:hover {
-    border-bottom: 2px solid #f1f1f1;
-    background-color: ${({ bgColor }) => bgColor && "#f1f1f1"};
+  margin: 0 10px;
+  :first-child {
+    margin-left: 0;
   }
-  @media (max-width: 1240px) and (min-width: 920px) {
-    padding: 0.7rem 0.4rem;
-    font-size: 16px;
+  :last-child {
+    margin-right: 0;
+  }
+  &:hover {
+    ::before {
+      background: #f1f1f1;
+      position: absolute;
+      content: "";
+      width: 100%;
+      bottom: -2px;
+      height: 2px;
+      left: 0%;
+      right: 0;
+    }
+  }
+  &.tab-list-active {
+    color: ${({ activeColor }) => (activeColor ? activeColor : "#de8430")};
+    ::before {
+      background: ${({ activeColor }) =>
+        activeColor ? activeColor : "#f1f1f1"};
+      position: absolute;
+      content: "";
+      width: 100%;
+      bottom: -2px;
+      height: 2px;
+      left: 0%;
+      right: 0;
+      z-index: 10;
+    }
   }
   @media (max-width: 920px) {
     font-size: 14px;
     padding: 0 10px 10px;
   }
 `;
-// export const TabList = styled("ol")`
-// ` ;
-// export const TabList = styled("ol")`
-// ` ;
+
+export const Animate = styled("div")`
+  @keyframes left {
+    0% {
+      width: 0;
+      opacity: 0;
+    }
+    50% {
+      width: 50%;
+      opacity: 0.4;
+    }
+    100% {
+      width: 0%;
+      opacity: 0;
+    }
+  }
+  ::after,
+  ::before {
+    content: "";
+    width: 50%;
+    height: 100%;
+    bottom: 0;
+    position: absolute;
+    opacity: 0.2;
+    background: #fafafa;
+  }
+  ::after {
+    border-radius: 0 4px 4px 0;
+    left: 50%;
+    animation: left 0.8s ease-in-out 1 alternate forwards;
+  }
+  ::before {
+    border-radius: 4px 0 0 4px;
+    right: 50%;
+    animation: left 0.8s ease-in-out 1 forwards;
+  }
+`;

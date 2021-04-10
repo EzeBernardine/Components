@@ -10,7 +10,14 @@ import { TabWrapper, TabList } from "./styles";
 import Tab from "./Tab";
 import { generateID } from "../../lib/generateID";
 
-const Tabs = ({ click, children, nonActiveColor, activeColor, bgColor }) => {
+const Tabs = ({
+  click,
+  children,
+  nonActiveColor,
+  activeColor,
+  bgColor,
+  full,
+}) => {
   const [activeTab, setActiveTab] = useState(children[0].props.label);
 
   const onClickTabItem = (tab) => {
@@ -19,7 +26,7 @@ const Tabs = ({ click, children, nonActiveColor, activeColor, bgColor }) => {
   };
   return (
     <TabWrapper activeColor={activeColor}>
-      <TabList>
+      <TabList bgColor={bgColor}>
         {children.map((child) => {
           const { label } = child.props;
           return (
@@ -28,7 +35,8 @@ const Tabs = ({ click, children, nonActiveColor, activeColor, bgColor }) => {
               key={generateID(15)}
               label={label}
               nonActiveColor={nonActiveColor}
-              bgColor={bgColor}
+              activeColor={activeColor}
+              full={full}
               onClick={onClickTabItem}
             />
           );

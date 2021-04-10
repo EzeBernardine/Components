@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Tabs from "./index";
 
-const Tab = ({ nonActiveColor, activeColor, bgColor }) => {
+const Tab = ({ nonActiveColor, activeColor, bgColor, full }) => {
   const [, setTabType] = useState("Profile Update"); //for tab section
 
   return (
@@ -11,6 +11,7 @@ const Tab = ({ nonActiveColor, activeColor, bgColor }) => {
       nonActiveColor={nonActiveColor}
       activeColor={activeColor}
       bgColor={bgColor}
+      full={full}
     >
       <div label="Profile">Item 1</div>
       <div label="Security">Item 2</div>
@@ -31,6 +32,7 @@ export const _Tabs = Template.bind({});
 
 _Tabs.args = {
   nonActiveColor: "#b9a694",
-  activeColor: "white",
-  bgColor: "blue",
+  activeColor: "blue",
+  bgColor: "white",
+  full: true,
 };
