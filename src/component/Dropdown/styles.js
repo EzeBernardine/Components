@@ -122,7 +122,7 @@ export const ListItems = styled.li`
   font-size: 13px;
   min-height: unset;
   display: flex;
-  padding: 5px 15px;
+  padding: 10px 15px;
 
   &:hover {
     box-shadow: 0 12px 20px -10px rgba(156, 39, 176, 0.28),

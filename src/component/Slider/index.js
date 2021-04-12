@@ -5,28 +5,24 @@
  */
 
 import React, { useState } from "react";
-import { ScrollingContainer } from "./styles";
-import { Flex } from "../Box/styles";
+import {
+  Container,
+  Layout,
+  Content,
+  ScrollRight,
+  ScrollLeft,
+  ArrowIconWrapper,
+} from "./styles";
 import {
   TiChevronLeft as LeftIcon,
   TiChevronRight as RightIcon,
 } from "react-icons/ti";
+import Proptypes from "prop-types";
 
-const ScrollingDiv = ({
-  children,
-  scrollOuterBg,
-  scrollInnerWidth,
-  scrollInnerPad,
-  scrollCardWidth,
-  scrollCardHeight,
-  scrollCardBg,
-  scrollArrowBg,
-  scrollArrowCol,
-  scrollCardGaps,
-}) => {
+const CardSlider = ({ children, ...props }) => {
   const cards = React.createRef();
 
-  const [callScroll, setCallScroll] = useState(true);
+  const [callScroll, setCallScroll] = useState(true); //controls if the layout willauto scroll
   const [scrollLeftValue, setScrollLeftValue] = useState(null);
   const [scrollLeftMaxValue, setScrollLeftMaxtValue] = useState(null);
 
@@ -36,15 +32,10 @@ const ScrollingDiv = ({
     direction === "right" &&
       (cards.current.scrollLeft += cards.current.clientWidth);
 
-    setScrollLeftValue(cards.current.scrollLeft);
+    setScrollLeftValue(cards.current.scrollLeft); // sets how far you have scrolled
     setScrollLeftMaxtValue(
       cards.current.scrollWidth - cards.current.offsetWidth
-    );
-  };
-
-  const mouseEvent = (event) => {
-    event === "enter" && setCallScroll(false);
-    event === "leave" && setCallScroll(true);
+    ); //this is the entire width of the scrolling section
   };
 
   callScroll &&
@@ -64,43 +55,41 @@ const ScrollingDiv = ({
     }, 1000);
 
   return (
-    <ScrollingContainer
-      scrollOuterBg={scrollOuterBg}
-      scrollInnerWidth={scrollInnerWidth}
-      scrollInnerPad={scrollInnerPad}
-      scrollCardWidth={scrollCardWidth}
-      scrollCardHeight={scrollCardHeight}
-      scrollCardBg={scrollCardBg}
-      scrollCardGaps={scrollCardGaps}
-      scrollArrowBg={scrollArrowBg}
-      scrollArrowCol={scrollArrowCol}
-      onMouseEnter={() => mouseEvent("enter")}
-      onMouseLeave={() => mouseEvent("leave")}
+    <Container
+      {...props}
+      onMouseEnter={() => setCallScroll(false)}
+      onMouseLeave={() => setCallScroll(true)}
     >
-      <div className="main">
-        <div className="cardsContainer" ref={cards}>
-          {/* takes already prepared cards */}
+      <Layout {...props}>
+        <Content ref={cards} {...props}>
           {children}
-        </div>
-      </div>
-
-      {scrollLeftValue !== 0 && (
-        <Flex className="scrollMoreMain_left">
-          <Flex onClick={() => handleScroll("left")}>
-            <LeftIcon />
-          </Flex>
-        </Flex>
-      )}
-
+          {/* takes already prepared cards */}
+        </Content>
+      </Layout>
       {!(scrollLeftMaxValue === scrollLeftValue) && (
-        <Flex className="scrollMoreMain_right">
-          <Flex onClick={() => handleScroll("right")}>
+        <ScrollLeft>
+          <ArrowIconWrapper {...props} onClick={() => handleScroll("right")}>
             <RightIcon />
-          </Flex>
-        </Flex>
+          </ArrowIconWrapper>
+        </ScrollLeft>
       )}
-    </ScrollingContainer>
+      '
+      {scrollLeftValue !== 0 && (
+        <ScrollRight>
+          <ArrowIconWrapper onClick={() => handleScroll("left")} {...props}>
+            <LeftIcon />
+          </ArrowIconWrapper>
+        </ScrollRight>
+      )}
+    </Container>
   );
 };
-
-export default ScrollingDiv;
+CardSlider.prototype = {
+  bgColor: Proptypes.string,
+  width: Proptypes.number,
+  gap: Proptypes.string,
+  cardWidth: Proptypes.string,
+  cardBgColor: Proptypes.string,
+  children: Proptypes.any,
+};
+export default CardSlider;
