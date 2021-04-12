@@ -12,7 +12,9 @@ const Alert = ({ type, duration, children }) => {
     let timeout =
       duration &&
       /**
-       * visible is set to false after a a period of time, though if no duration is set,
+       * visible determines if the alert component is displayed or not is set to false after a a period of time.
+       * 
+       * If no duration is set,
        * it remains true making the alert component always visible.
        */
       setTimeout(() => {

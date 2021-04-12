@@ -1,16 +1,21 @@
+/*
+ * component: Slider
+ * author: Eze Bernardine May
+ * Date: May 16th, 2020
+ */
 import React, { useState, useEffect } from "react";
 import {
-  CarouselStyles,
+  CarouselWrapper,
   CarouselContent,
   Navigator,
   Indicators,
 } from "./styles";
-import { generateID } from "../../lib/generateID";
 
 const Carousel = ({
   duration = 7000,
   carouselData,
   indicatorPosition,
+  activeColor,
   children,
 }) => {
   const [card, setCard] = useState(0); //this takes care of the number of carousel cards
@@ -39,22 +44,21 @@ const Carousel = ({
   });
 
   return (
-    <CarouselStyles>
-      <CarouselContent translateRate={card} className="carousel">
-        {children}
-      </CarouselContent>
+    <CarouselWrapper>
+      <CarouselContent translateRate={card}>{children}</CarouselContent>
 
-      <Navigator   margin={indicatorPosition}>
+      <Navigator margin={indicatorPosition}>
         {carouselData.map((item, index) => (
           <Indicators
             type="button"
-            key={generateID(15)}
+            key={index} //The key property should not be dynamic else, the transition effect wil not run. That is why I did not use generateID()
             onClick={() => setCard(index)}
-            className={card === index ? "active" : "notActive"}
+            currentIndicator={card === index}
+            activeColor={activeColor}
           ></Indicators>
         ))}
       </Navigator>
-    </CarouselStyles>
+    </CarouselWrapper>
   );
 };
 

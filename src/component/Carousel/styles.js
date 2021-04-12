@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const CarouselContent = styled.div`
-  background: red;
   transition: 500ms linear;
   display: flex;
   justify-content: flex-start;
@@ -18,7 +17,8 @@ export const CarouselContent = styled.div`
     margin: auto;
   }
 `;
-export const CarouselStyles = styled.div`
+
+export const CarouselWrapper = styled.div`
   width: 100%;
   min-height: 100%;
   min-width: 100%;
@@ -35,19 +35,21 @@ export const Navigator = styled.div`
   width: max-content;
   margin: ${({ margin }) => (margin ? margin : "unset")};
 `;
+
 export const Indicators = styled.button`
-  transition: 500ms linear;
-  width: 16px;
+  transition: 1s ease-out;
   height: 8px;
   margin: 0 10px;
-  background-color: blue;
   border-radius: 4px;
   cursor: pointer;
   border: none;
-  transition: 2s linear;
-  &.active {
-    background: green;
-    transition: 2s linear;
-    width: 32px;
-  }
+  width: ${({ currentIndicator }) => (currentIndicator ? "32px" : "16px")};
+  background-color: ${({ currentIndicator, theme, activeColor }) =>
+    currentIndicator
+      ? activeColor
+        ? activeColor
+        : theme
+        ? theme.palette.primary.main
+        : "blue"
+      : "#dedce1"};
 `;
