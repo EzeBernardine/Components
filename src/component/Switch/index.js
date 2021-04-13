@@ -1,7 +1,7 @@
 /*
  * component: switch
  * author: Eze Bernardine May
- * Date: March 16th, 2021
+ * Date: Jun 16th, 2020
  */
 
 import React, { useState } from "react";

@@ -5,7 +5,8 @@ export const Container = styled.div`
   position: relative;
   z-index: 10;
   position: relative;
-  padding: 20px 30px 20px 60px;
+  padding: 20px 30px 20px 30px;
+  display: flex;
   border-radius: 4px;
   border: ${({ type, theme }) =>
     type === "success"
@@ -30,9 +31,7 @@ export const Container = styled.div`
 `;
 
 export const IconType = styled.span`
-  position: absolute;
-  top: 20px;
-  left: 20px;
+  margin-right: 20px;
   > svg {
     color: ${({ type, theme }) =>
       type === "success"
@@ -48,6 +47,8 @@ export const IconType = styled.span`
 `;
 export const Children = styled.span`
   * {
+    font-size: 14px;
+    line-height: 20px;
     color: ${({ type, theme }) =>
       type === "success"
         ? theme.palette.success.dark
