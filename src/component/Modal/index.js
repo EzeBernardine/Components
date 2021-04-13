@@ -15,11 +15,11 @@ import {
   Body,
   Overlay,
   Content,
+  OverFlow,
   CloseIconWrap,
 } from "./styles";
 import PropTypes from "prop-types";
 import { CloseIcon } from "../../assets/svg";
-import { OverFlowScrollBar } from "../OverflowScroll/styles";
 
 const Modal = forwardRef(
   ({ show, handleClose, title, noHeader, children }, ref) => {
@@ -71,9 +71,9 @@ const Modal = forwardRef(
                 </CloseIconWrap>
               </HeaderWrap>
 
-              <OverFlowScrollBar>
+              <OverFlow>
                 <Content>{children}</Content>
-              </OverFlowScrollBar>
+              </OverFlow>
             </Body>
           </ModalWrap>
         </Main>

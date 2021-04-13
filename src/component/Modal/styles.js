@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { OverFlowScrollBar } from "../OverflowScroll/styles";
 
 export const Container = styled("div")`
   font-family: ${({ theme }) => theme.typography.fontFamily};
@@ -93,10 +94,12 @@ export const CloseIconWrap = styled("span")`
   color: ${({ theme }) => theme.palette.grey[200]};
 `;
 export const Content = styled("div")`
+  width: auto;
+  color: ${({ theme }) => theme.palette.grey[300]};
+  padding: 30px;
+`;
+export const OverFlow = styled(OverFlowScrollBar)`
+  max-height: calc(80vh - 60px);
   overflow-y: auto;
   overflow-x: hidden;
-  width: auto;
-  max-height: 70vh;
-  padding: 30px;
-  color: ${({ theme }) => theme.palette.grey[300]};
 `;
