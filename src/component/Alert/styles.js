@@ -5,7 +5,7 @@ export const Container = styled.div`
   position: relative;
   z-index: 10;
   position: relative;
-  padding: 20px 30px 20px 40px;
+  padding: 20px 30px 20px 60px;
   border-radius: 4px;
   border: ${({ type, theme }) =>
     type === "success"
@@ -31,15 +31,15 @@ export const Container = styled.div`
 
   > svg {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 20px;
+    left: 20px;
   }
 `;
 
 export const Close = styled.button`
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 20px;
+  right: 20px;
   border: none;
   padding: 0;
   background-color: transparent;

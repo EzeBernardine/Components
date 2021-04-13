@@ -28,6 +28,11 @@ const palette = {
     light: "#e7e77f73",
     contrastText: white,
   },
+  info: {
+    main: "#c0c036",
+    light: "#e7e77f73",
+    contrastText: white,
+  },
   grey: {
     0: "#FAFAFA",
     10: "#EEE",

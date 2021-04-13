@@ -8,6 +8,13 @@ export default {
 
 const Template = (args) => <Alert {...args} />;
 
+export const Info = Template.bind({});
+Info.args = {
+  type: "info",
+  duration: false,
+  children: <span>Lorem ipsum</span>,
+};
+
 export const Success = Template.bind({});
 Success.args = {
   type: "success",
