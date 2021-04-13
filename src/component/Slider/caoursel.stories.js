@@ -1,6 +1,6 @@
 import React from "react";
 
-import Carousels from "./index";
+import Carousel from "./index";
 import { generateID } from "../../lib/generateID";
 
 let cards = [
@@ -48,13 +48,13 @@ let cards = [
 
 export default {
   title: "Carousel",
-  component: Carousels,
+  component: Carousel,
 };
 
-const Template = (args) => <Carousels {...args} />;
+const Template = (args) => <Carousel {...args} />;
 
-export const CardSlider = Template.bind({});
-CardSlider.args = {
+export const Slider = Template.bind({});
+Slider.args = {
   bgColor: "#f6f6f6",
   width: 90,
   gap: "20px",

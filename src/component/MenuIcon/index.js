@@ -9,15 +9,10 @@ import { Container, Wrapper, Icon } from "./styles";
 import PropTypes from "prop-types";
 
 const MenuIcon = ({ click, showMore, color }) => {
-
   return (
-    <Container>
+    <Container onClick={click}>
       <Wrapper>
-        <Icon
-          showMore={showMore}
-          color={color}
-          onClick={click}
-        />
+        <Icon showMore={showMore} color={color} />
       </Wrapper>
     </Container>
   );

@@ -22,8 +22,8 @@ export default {
 
 const Template = (args) => <Carousel {...args} />;
 
-export const Slider = Template.bind({});
-Slider.args = {
+export const _carousel = Template.bind({});
+_carousel.args = {
   carouselData: Testimonials,
   indicatorPosition: "0 auto",
   activeColor: "red",

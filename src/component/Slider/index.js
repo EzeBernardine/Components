@@ -4,7 +4,7 @@
  * Date: April 12th, 2021
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Layout,
@@ -38,21 +38,33 @@ const CardSlider = ({ children, ...props }) => {
     ); //this is the entire width of the scrolling section
   };
 
-  callScroll &&
-    setInterval(() => {
-      try {
-        const { scrollLeft } = cards.current;
+  useEffect(() => {
+    let slowInterval =
+      callScroll &&
+      setInterval(() => {
+        try {
+          const { scrollLeft } = cards.current;
 
-        setScrollLeftValue(scrollLeft);
+          cards.current.scrollWidth - cards.current.offsetWidth === scrollLeft
+            ? (cards.current.scrollLeft = 0)
+            : (cards.current.scrollLeft += cards.current.clientWidth);
+        } catch (err) {}
+      }, 3000);
+
+    /**
+     * reset scrolleft and scrollMaxWidth values faster
+     */
+    let fastInterval = setInterval(() => {
+      try {
+        setScrollLeftValue(cards.current.scrollLeft);
         setScrollLeftMaxtValue(
           cards.current.scrollWidth - cards.current.offsetWidth
         );
-
-        cards.current.scrollWidth - cards.current.offsetWidth === scrollLeft
-          ? (cards.current.scrollLeft = 0)
-          : (cards.current.scrollLeft += cards.current.clientWidth);
       } catch (err) {}
-    }, 1000);
+    }, 500);
+
+    return () => clearInterval(fastInterval) && clearInterval(slowInterval);
+  });
 
   return (
     <Container
