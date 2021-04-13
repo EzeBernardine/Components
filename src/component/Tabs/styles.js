@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const TabWrapper = styled("div")``;
 
 export const TabList = styled("ol")`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   padding-left: 0;
   display: flex;
   width: 100%;

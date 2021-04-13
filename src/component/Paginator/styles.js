@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const PaginatorStyles = styled("div")`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   .pagination {
     display: flex;
     list-style: none;

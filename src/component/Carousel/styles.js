@@ -20,6 +20,7 @@ export const CarouselContent = styled.div`
 `;
 
 export const CarouselWrapper = styled.div`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   width: 100%;
   min-height: 100%;
   min-width: 100%;

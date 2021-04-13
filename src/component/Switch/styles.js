@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled("div")`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   width: 42px;
   height: 38px;
   display: flex;

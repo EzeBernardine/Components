@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Flex } from "../Box/styles";
 
 export const Container = styled("div")`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   background: ${({ bgColor, theme }) =>
     bgColor ? bgColor : theme ? theme.palette.primary.main : "white"};
   width: 100%;

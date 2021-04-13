@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   background: white;
   padding-bottom: ${({ paginator }) => !paginator && "20px"};
 `;

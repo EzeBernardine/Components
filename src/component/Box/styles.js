@@ -7,6 +7,7 @@
 import styled from "styled-components";
 
 export const Flex = styled.div`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   display: flex;
   justify-content: ${({ justifyContent }) => justifyContent || "center"};
   align-items: ${({ alignItems }) => alignItems || "center"};
@@ -24,6 +25,7 @@ export const Flex = styled.div`
 `;
 
 export const Container = styled.div`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   width: ${({ width }) => width || "100%"};
   height: ${({ height }) => height || "100%"};
   text-align: ${({ textAlign }) => textAlign || "center"};
@@ -33,6 +35,7 @@ export const Container = styled.div`
 `;
 
 export const Grid = styled("div")`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   display: grid;
   grid-template-columns: ${(props) => props.columns || "1fr"};
   grid-template-rows: ${(props) => props.rows || "auto"};

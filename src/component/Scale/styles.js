@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const RoundScaleContainer = styled.div`
-  font-family: "Fira Sans", sans-serif;
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   height: ${({ size, half }) =>
     half ? (size ? size / 2 + "px" : "75px") : "auto"};
   width: ${({ size, half }) =>

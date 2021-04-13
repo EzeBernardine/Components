@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.button`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   background: transparent;
   border: none;
   padding: 0;
@@ -20,8 +21,7 @@ export const Icon = styled.div`
   background: ${({ theme }) => (theme ? theme.palette.primary.main : "red")};
   align-items: center;
   position: relative;
-  visibility: ${({ showMore }) =>
-    showMore ? "hidden " : "unset"};
+  visibility: ${({ showMore }) => (showMore ? "hidden " : "unset")};
   &::before,
   &::after {
     content: "";
@@ -37,12 +37,10 @@ export const Icon = styled.div`
   }
   &::before {
     top: ${({ showMore }) => (showMore ? "0" : "-9px")};
-    transform: ${({ showMore }) =>
-      showMore ? "rotate(45deg) " : "none"};
+    transform: ${({ showMore }) => (showMore ? "rotate(45deg) " : "none")};
   }
   &::after {
     top: ${({ showMore }) => (showMore ? "0" : "9px")};
-    transform: ${({ showMore }) =>
-      showMore ? "rotate(-45deg)" : "none"};
+    transform: ${({ showMore }) => (showMore ? "rotate(-45deg)" : "none")};
   }
 `;

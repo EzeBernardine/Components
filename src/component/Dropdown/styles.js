@@ -5,7 +5,6 @@ export const Wrapper = styled("div")`
   position: relative;
   width: max-content;
   min-width: max-content;
-  font-family: "Fira Sans", sans-serif;
 `;
 
 export const Layout = styled.div`
