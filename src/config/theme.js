@@ -14,23 +14,27 @@ const palette = {
     contrastText: white,
   },
   error: {
-    main: "#DF835F",
+    main: "#e73939",
     light: "#FFF3EE",
+    dark: "#9c2e2e ",
     contrastText: white,
   },
   success: {
-    main: "#3bbe2f",
-    light: "#5cff4f61",
+    main: "#17e904",
+    light: "#cff0cc61",
+    dark: "#366936",
     contrastText: white,
   },
   warning: {
-    main: "#c0c036",
-    light: "#e7e77f73",
+    main: "#dcdc2c",
+    light: "#f7f7c473",
+    dark: "#787836",
     contrastText: white,
   },
   info: {
-    main: "#c0c036",
-    light: "#e7e77f73",
+    main: "#2136e5b3",
+    light: "#e4f3fe",
+    dark: "#313174",
     contrastText: white,
   },
   grey: {
@@ -50,8 +54,7 @@ const shadows = {
 };
 
 const typography = {
-  fontFamily:
-    "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', sans-serif",
+  fontFamily: '"Fira Sans", sans-serif',
 };
 
 const shape = {

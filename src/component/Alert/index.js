@@ -1,10 +1,9 @@
 import React from "react";
-import { Container, Close } from "./styles";
+import { Container, Close, IconType, Children } from "./styles";
 import {
-  AlertIcon,
-  SuccessIcon,
+  SuccessOutlineIcon,
   CloseIcon,
-  ErrorIcon,
+  ErrorOutlineIcon,
   WarningIcon,
   InfoIcon,
 } from "../../assets/svg";
@@ -35,23 +34,25 @@ const Alert = ({ type, duration, children }) => {
     <>
       {visible ? (
         <Container type={type}>
-          {type === "success" ? (
-            <SuccessIcon width="20px" height="20px" />
-          ) : type === "error" ? (
-            <ErrorIcon width="20px" height="20px" />
-          ) : type === "warning" ? (
-            <WarningIcon width="20px" height="20px" />
-          ) : type === "info" ? (
-            <InfoIcon width="20px" height="20px" />
-          ) : null}
+          <IconType type={type}>
+            {type === "success" ? (
+              <SuccessOutlineIcon width="20px" height="20px" />
+            ) : type === "error" ? (
+              <ErrorOutlineIcon width="20px" height="20px" />
+            ) : type === "warning" ? (
+              <WarningIcon width="20px" height="20px" />
+            ) : type === "info" ? (
+              <InfoIcon width="20px" height="20px" />
+            ) : null}
+          </IconType>
 
-          {type === "warning" ? (
+          {type === "warning" || type === "info" ? (
             <Close onClick={() => setVisible(false)}>
               <CloseIcon width="13px" height="13px" />
             </Close>
           ) : null}
 
-          {children}
+          <Children type={type}>{children}</Children>
         </Container>
       ) : null}
     </>

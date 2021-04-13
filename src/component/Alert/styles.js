@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
- font-family: "Fira Sans", sans-serif;
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   position: relative;
   z-index: 10;
   position: relative;
@@ -11,31 +11,55 @@ export const Container = styled.div`
     type === "success"
       ? `1px solid ${theme.palette.success.light}`
       : type === "warning"
-      ? `px solid  ${theme.palette.warning.light}`
-      : `1px solid ${theme.palette.error.light}`};
+      ? `1px solid  ${theme.palette.warning.light}`
+      : type === "info"
+      ? `1px solid  ${theme.palette.info.light}`
+      : type === "error"
+      ? `1px solid  ${theme.palette.error.light}`
+      : null};
   background: ${({ type, theme }) =>
     type === "success"
       ? theme.palette.success.light
       : type === "warning"
       ? theme.palette.warning.light
-      : theme.palette.error.light};
+      : type === "info"
+      ? theme.palette.info.light
+      : type === "error"
+      ? theme.palette.error.light
+      : null};
+`;
 
-  * {
+export const IconType = styled.span`
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  > svg {
     color: ${({ type, theme }) =>
       type === "success"
         ? theme.palette.success.main
         : type === "warning"
         ? theme.palette.warning.main
-        : theme.palette.error.main};
-  }
-
-  > svg {
-    position: absolute;
-    top: 20px;
-    left: 20px;
+        : type === "info"
+        ? theme.palette.info.main
+        : type === "error"
+        ? theme.palette.error.main
+        : "green"};
   }
 `;
-
+export const Children = styled.span`
+  * {
+    color: ${({ type, theme }) =>
+      type === "success"
+        ? theme.palette.success.dark
+        : type === "warning"
+        ? theme.palette.warning.dark
+        : type === "info"
+        ? theme.palette.info.dark
+        : type === "error"
+        ? theme.palette.error.dark
+        : null};
+  }
+`;
 export const Close = styled.button`
   position: absolute;
   top: 20px;

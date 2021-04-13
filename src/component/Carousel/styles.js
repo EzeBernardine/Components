@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const CarouselContent = styled.div`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   transition: 500ms linear;
   display: flex;
   justify-content: flex-start;

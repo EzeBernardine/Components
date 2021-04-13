@@ -332,6 +332,98 @@ export const WarningIcon = ({ width, height, color }) => (
     </g>
   </svg>
 );
+export const ErrorOutlineIcon = ({ width, height, color }) => (
+  <svg
+    width={width || 52}
+    height={height || 52}
+    fill={color || "currentColor"}
+    x="0"
+    y="0"
+    viewBox="0 0 512 512"
+  >
+    <g>
+      <g xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <path
+            d="M256,0C114.508,0,0,114.497,0,256c0,141.493,114.497,256,256,256c141.492,0,256-114.497,256-256    C512,114.507,397.503,0,256,0z M256,472c-119.384,0-216-96.607-216-216c0-119.385,96.607-216,216-216    c119.384,0,216,96.607,216,216C472,375.385,375.393,472,256,472z"
+            fill={color || "currentColor"}
+            data-original="#000000"
+          />
+        </g>
+      </g>
+      <g xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <path
+            d="M343.586,315.302L284.284,256l59.302-59.302c7.81-7.81,7.811-20.473,0.001-28.284c-7.812-7.811-20.475-7.81-28.284,0    L256,227.716l-59.303-59.302c-7.809-7.811-20.474-7.811-28.284,0c-7.81,7.811-7.81,20.474,0.001,28.284L227.716,256    l-59.302,59.302c-7.811,7.811-7.812,20.474-0.001,28.284c7.813,7.812,20.476,7.809,28.284,0L256,284.284l59.303,59.302    c7.808,7.81,20.473,7.811,28.284,0C351.398,335.775,351.397,323.112,343.586,315.302z"
+            fill={color || "currentColor"}
+            data-original="#000000"
+          />
+        </g>
+      </g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+    </g>
+  </svg>
+);
+export const SuccessOutlineIcon = ({ width, height, color }) => (
+  <svg
+    width={width || 52}
+    height={height || 52}
+    fill={color || "currentColor"}
+    x="0"
+    y="0"
+    viewBox="0 0 512 512"
+  >
+    <g>
+      <g xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <path
+            d="M383.841,171.838c-7.881-8.31-21.02-8.676-29.343-0.775L221.987,296.732l-63.204-64.893    c-8.005-8.213-21.13-8.393-29.35-0.387c-8.213,7.998-8.386,21.137-0.388,29.35l77.492,79.561    c4.061,4.172,9.458,6.275,14.869,6.275c5.134,0,10.268-1.896,14.288-5.694l147.373-139.762    C391.383,193.294,391.735,180.155,383.841,171.838z"
+            fill={color || "currentColor"}
+            data-original="#000000"
+          />
+        </g>
+      </g>
+      <g xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <path
+            d="M256,0C114.84,0,0,114.84,0,256s114.84,256,256,256s256-114.84,256-256S397.16,0,256,0z M256,470.487    c-118.265,0-214.487-96.214-214.487-214.487c0-118.265,96.221-214.487,214.487-214.487c118.272,0,214.487,96.221,214.487,214.487    C470.487,374.272,374.272,470.487,256,470.487z"
+            fill={color || "currentColor"}
+            data-original="#000000"
+          />
+        </g>
+      </g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+      <g xmlns="http://www.w3.org/2000/svg"></g>
+    </g>
+  </svg>
+);
 // export const AlertIcon = ({ width, height, color }) => (
 //   <svg
 //     width={width || 52}

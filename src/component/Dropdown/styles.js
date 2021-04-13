@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled("div")`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   position: relative;
   width: max-content;
   min-width: max-content;
