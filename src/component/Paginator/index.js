@@ -10,7 +10,7 @@ import { Container, ListItem, Paginator, Items, FirstLast } from "./styles";
 import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import { generateID } from "../../lib/generateID";
 
-const Pagination = ({ items, onChangePage, pageSize, firstLast }) => {
+const Pagination = ({ items, onChangePage, pageSize, firstLast, prevNext }) => {
   const [pagedTableDataArray, setPagedTableDataArray] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0); //holds the active clicked paginator list
 
@@ -71,13 +71,14 @@ const Pagination = ({ items, onChangePage, pageSize, firstLast }) => {
           </FirstLast>
         ) : null}
 
-        <ListItem
-          disabled={!(activeIndex >= 1)}
-          onClick={() => activeIndex >= 1 && getCurrentArray(activeIndex - 1)}
-        >
-          <FiChevronsLeft />
-        </ListItem>
-
+        {prevNext && (
+          <ListItem
+            disabled={!(activeIndex >= 1)}
+            onClick={() => activeIndex >= 1 && getCurrentArray(activeIndex - 1)}
+          >
+            <FiChevronsLeft />
+          </ListItem>
+        )}
         {pagedTableDataArray
           .slice(
             largePageIndex ? activeIndex - 3 : 0,
@@ -109,15 +110,17 @@ const Pagination = ({ items, onChangePage, pageSize, firstLast }) => {
             </ListItem>
           ))}
 
-        <ListItem
-          disabled={!(pagedTableDataArray.length >= activeIndex + 2)}
-          onClick={() =>
-            pagedTableDataArray.length >= activeIndex + 2 &&
-            getCurrentArray(activeIndex + 1)
-          }
-        >
-          <FiChevronsRight />
-        </ListItem>
+        {prevNext && (
+          <ListItem
+            disabled={!(pagedTableDataArray.length >= activeIndex + 2)}
+            onClick={() =>
+              pagedTableDataArray.length >= activeIndex + 2 &&
+              getCurrentArray(activeIndex + 1)
+            }
+          >
+            <FiChevronsRight />
+          </ListItem>
+        )}
 
         {firstLast ? (
           <FirstLast

@@ -113,7 +113,7 @@ const CustomTable = ({
             <Pagination
               items={tableBody}
               pageSize={pageSize || 5}
-              // prevNext={prevNext || null}
+              prevNext={prevNext || false}
               onChangePage={(item) => setPagedData(item)}
               firstLast={firstLast || false}
             />

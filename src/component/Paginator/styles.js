@@ -65,13 +65,21 @@ export const Items = styled("span")`
   font-size: 16px;
   font-weight: ${({ active }) => (active ? "bold" : "normal")};
 `;
-export const FirstLast = styled("span")`
+export const FirstLast = styled("li")`
   font-size: 14px;
   cursor: pointer;
   margin: 2px;
+  list-style: none;
   padding: 5px;
   font-weight: normal;
-  color: ${({ disabled, theme }) =>
-    disabled ? " #44444435" : theme ? theme.palette.primary.main : "#44444435"};
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  color: ${({ disabled }) => (disabled ? " #44444435" : "#6b6b6b")};
+  :hover {
+    color: ${({ disabled, theme }) =>
+      disabled
+        ? " #44444435"
+        : theme
+        ? theme.palette.primary.main
+        : "#44444435"};
+  }
 `;
