@@ -6,7 +6,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { PaginatorStyles } from "./styles";
+import { Container, ListItem, Paginator, Items } from "./styles";
 import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import { generateID } from "../../lib/generateID";
 
@@ -109,52 +109,52 @@ class Pagination extends React.Component {
     const { radius, color, firstLast, prevNext } = this.props;
 
     return (
-      <PaginatorStyles radius={radius} color={color}>
-        <ul className="pagination">
+      <Container radius={radius} color={color}>
+        <Paginator>
           {firstLast && (
-            <li className={pager.currentPage === 1 ? "disabled" : ""}>
-              <span onClick={() => this.setPage(1)}>First</span>
-            </li>
+            <ListItem className={pager.currentPage === 1 ? "disabled" : ""}>
+              <Items onClick={() => this.setPage(1)}>First</Items>
+            </ListItem>
           )}
           {prevNext && (
-            <li className={pager.currentPage === 1 ? "disabled" : ""}>
-              <span onClick={() => this.setPage(pager.currentPage - 1)} >
+            <ListItem className={pager.currentPage === 1 ? "disabled" : ""}>
+              <Items onClick={() => this.setPage(pager.currentPage - 1)}>
                 {" "}
                 <FiChevronsLeft />{" "}
-              </span>
-            </li>
+              </Items>
+            </ListItem>
           )}
           {pager.pages.map((page, index) => (
-            <li
+            <ListItem
               onClick={() => this.setPage(page)}
               key={generateID(14)}
               className={pager.currentPage === page ? "active" : ""}
             >
-              <span>{page}</span>
-            </li>
+              <Items>{page}</Items>
+            </ListItem>
           ))}
           {prevNext && (
-            <li
+            <ListItem
               className={
                 pager.currentPage === pager.totalPages ? "disabled" : ""
               }
             >
-              <span onClick={() => this.setPage(pager.currentPage + 1)}>
+              <Items onClick={() => this.setPage(pager.currentPage + 1)}>
                 <FiChevronsRight />
-              </span>
-            </li>
+              </Items>
+            </ListItem>
           )}
           {firstLast && (
-            <li
+            <ListItem
               className={
                 pager.currentPage === pager.totalPages ? "disabled" : ""
               }
             >
-              <span onClick={() => this.setPage(pager.totalPages)}>Last</span>
-            </li>
+              <Items onClick={() => this.setPage(pager.totalPages)}>Last</Items>
+            </ListItem>
           )}
-        </ul>
-      </PaginatorStyles>
+        </Paginator>
+      </Container>
     );
   }
 }
