@@ -1,60 +1,60 @@
 import styled from "styled-components";
+import { OverFlowScrollBar } from "../OverflowScroll/styles";
 
-export const Container = styled("div")`
+export const Container = styled(OverFlowScrollBar)`
+  display: flex;
+  margin: 0;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
   font-family: ${({ theme }) => theme.typography.fontFamily};
+  overflow-x: auto;
+  *,
+  *::after,
+  *::before {
+    box-sizing: border-box;
+  }
 `;
 
 export const Paginator = styled("ul")`
   display: flex;
-  list-style: none;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+  padding: 10px 0;
 `;
 
 export const ListItem = styled("li")`
-  position: relative;
-  height: 30px;
+  padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #6b6b6b;
   text-decoration: none;
   min-width: 30px;
-  background: transparent;
-  box-sizing: border-box;
-  min-height: auto;
+  width: auto;
   transition: all 0.3s;
   font-weight: 400;
-  line-height: 30px;
-  border-radius: ${({ radius }) => (radius ? radius : "4px")};
+  border-radius: 4px;
   margin: 2px;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  color: ${({ active, disabled }) =>
+    active ? "#fff" : disabled ? "#44444435" : " #6b6b6b"};
+  box-shadow: ${({ active }) =>
+    active
+      ? "0 4px 5px 0 rgba(156, 39, 176, 0.14), 0 1px 10px 0 rgba(156, 39, 176, 0.12),  0 2px 4px -1px rgba(156, 39, 176, 0.2)"
+      : "none"};
+  background-color: ${({ theme, active, disabled }) =>
+    active
+      ? theme
+        ? theme.palette.primary.main
+        : "#540c8c"
+      : disabled
+      ? " #44444435"
+      : "transparent"};
 
   :hover {
-    z-index: 3;
-    border-color: #ddd;
-    background-color: #44444435;
-  }
-  a {
-    font-size: 12px;
-    color: #555;
-  }
-
-  &.active {
-    color: #fff;
-    font-weight: 700;
-    box-shadow: 0 4px 5px 0 rgba(156, 39, 176, 0.14),
-      0 1px 10px 0 rgba(156, 39, 176, 0.12),
-      0 2px 4px -1px rgba(156, 39, 176, 0.2);
-    border-color: #540c8c;
-    background-color: #540c8c;
-    a {
-      color: white;
-    }
-  }
-  &.disabled {
-    cursor: not-allowed;
-    color: #44444480;
-    border-color: #44444435;
-    background-color: #44444435;
+    background-color: ${({ theme, active }) =>
+      active ? (theme ? theme.palette.primary.main : "#540c8c") : " #44444435"};
   }
 `;
 
@@ -62,4 +62,16 @@ export const Items = styled("span")`
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  font-size: 16px;
+  font-weight: ${({ active }) => (active ? "bold" : "normal")};
+`;
+export const FirstLast = styled("span")`
+  font-size: 14px;
+  cursor: pointer;
+  margin: 2px;
+  padding: 5px;
+  font-weight: normal;
+  color: ${({ disabled, theme }) =>
+    disabled ? " #44444435" : theme ? theme.palette.primary.main : "#44444435"};
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
 `;

@@ -45,9 +45,7 @@ export const Paginator = styled("div")`
   background: white;
   padding: 1em 5px;
   display: ${({ paginator }) => (paginator ? "block" : "none")};
-  ul {
-    justify-content: flex-end;
-  }
+ 
 `;
 
 export const Table = styled.table`

@@ -29,11 +29,11 @@ const CustomTable = ({
   firstLast,
   prevNext,
 }) => {
-  const [pageOfItems, setPageOfItems] = useState([]);
-  const [isOpen, setIsOpen] = useState([]);
-  const [tableData] = useState(tableBody);
+  //Holds paginated tableData
+  const [pagedData, setPagedData] = useState([]);
 
-  const onChangePage = (items) => setPageOfItems(items);
+  //holds table showMore data
+  const [isOpen, setIsOpen] = useState([]);
 
   //determines which tableRowShowMoreData will be displayed.
   const handleOpenTable = (idx, rowData, moreData) => {
@@ -99,7 +99,7 @@ const CustomTable = ({
 
               <tbody>
                 {paginator
-                  ? pageOfItems.map((data, idx) =>
+                  ? pagedData.map((data, idx) =>
                       returnTableRow(data, idx, isOpen)
                     )
                   : tableBody.map((data, idx) =>
@@ -111,11 +111,11 @@ const CustomTable = ({
 
           <Paginator className="paginator" paginator={paginator}>
             <Pagination
-              items={tableData}
+              items={tableBody}
               pageSize={pageSize || 5}
-              prevNext={prevNext || null}
-              onChangePage={onChangePage}
-              firstLast={firstLast || null}
+              // prevNext={prevNext || null}
+              onChangePage={(item) => setPagedData(item)}
+              firstLast={firstLast || false}
             />
           </Paginator>
         </Container>
@@ -129,7 +129,7 @@ const CustomTable = ({
 CustomTable.propTypes = {
   tableBody: PropTypes.array.isRequired,
   tableHead: PropTypes.array.isRequired,
-  moreDetail: PropTypes.array.isRequired,
+  moreDetail: PropTypes.array,
   rowClick: PropTypes.func,
   gap: PropTypes.string,
   headBkColor: PropTypes.string,

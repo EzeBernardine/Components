@@ -4,161 +4,134 @@
  * Date: April 16th, 2020
  */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Container, ListItem, Paginator, Items } from "./styles";
+import { Container, ListItem, Paginator, Items, FirstLast } from "./styles";
 import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import { generateID } from "../../lib/generateID";
 
-const propTypes = {
-  items: PropTypes.array.isRequired,
-  onChangePage: PropTypes.func.isRequired,
-  initialPage: PropTypes.number,
-  pageSize: PropTypes.number,
-};
+const Pagination = ({ items, onChangePage, pageSize, firstLast }) => {
+  const [pagedTableDataArray, setPagedTableDataArray] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0); //holds the active clicked paginator list
 
-const defaultProps = {
-  initialPage: 1,
-  pageSize: 5,
-};
+  let largePageIndex = activeIndex > 3; //returns true if the active index is more than 3
 
-class Pagination extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { pager: {} };
-  }
-
-  componentWillMount() {
-    if (this.props.items && this.props.items.length) {
-      this.setPage(this.props.initialPage);
+  /**
+   * @param {Number} pageSize
+   * @param {Array} array
+   * @returns {Array}
+   * split the entire tableDataprops into pageSize number of arrays
+   * and push it into a new array,
+   * thereby returning an array of arrays containing pageSize lenght of arrays.
+   */
+  const chunkArray = (array, pageSize) => {
+    let tempArray = [];
+    for (let i = 0; i < array.length; i += pageSize) {
+      let myChunk = array.slice(i, i + pageSize);
+      tempArray.push(myChunk);
     }
-  }
+    return tempArray;
+  };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.items !== prevProps.items) {
-      this.setPage(this.props.initialPage);
-    }
-  }
+  /**
+   *
+   * @param {Number} index
+   * @returns sets the active tableArray current index
+   */
+  const activeTableNumber = (index) => setActiveIndex(index);
 
-  setPage(page) {
-    let { items, pageSize } = this.props;
-    let pager = this.state.pager;
+  /**
+   *
+   * @param {Number} index
+   * @returns  a call to set active pagedTable index
+   * passes onChangePage the current table pagedData onChange of the table pages
+   */
+  const getCurrentArray = (index) => {
+    let tempArray = chunkArray(items, pageSize);
+    onChangePage(tempArray[index]);
+    return activeTableNumber(index);
+  };
 
-    if (page < 1 || page > pager.totalPages) {
-      return;
-    }
+  useEffect(() => {
+    //sets the number of pagedData array
+    setPagedTableDataArray(chunkArray(items, pageSize));
+    //Set the initail pagedData
+    getCurrentArray(0);
+  }, []);
 
-    pager = this.getPager(items.length, page, pageSize);
+  return (
+    <Container>
+      <Paginator>
+        {firstLast ? (
+          <FirstLast
+            disabled={activeIndex === 0}
+            onClick={() => getCurrentArray(0)}
+          >
+            First
+          </FirstLast>
+        ) : null}
 
-    let pageOfItems = items.slice(pager.startIndex, pager.endIndex + 1);
+        <ListItem
+          disabled={!(activeIndex >= 1)}
+          onClick={() => activeIndex >= 1 && getCurrentArray(activeIndex - 1)}
+        >
+          <FiChevronsLeft />
+        </ListItem>
 
-    this.setState({ pager: pager });
-    this.props.onChangePage(pageOfItems);
-  }
-
-  getPager(totalItems, currentPage, pageSize) {
-    currentPage = currentPage || 1;
-
-    pageSize = pageSize || 10;
-
-    let totalPages = Math.ceil(totalItems / pageSize);
-
-    let startPage, endPage;
-    if (totalPages <= 10) {
-      startPage = 1;
-      endPage = totalPages;
-    } else {
-      if (currentPage <= 6) {
-        startPage = 1;
-        endPage = 10;
-      } else if (currentPage + 4 >= totalPages) {
-        startPage = totalPages - 9;
-        endPage = totalPages;
-      } else {
-        startPage = currentPage - 5;
-        endPage = currentPage + 4;
-      }
-    }
-
-    let startIndex = (currentPage - 1) * pageSize;
-    let endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
-    let pages = [...Array(endPage + 1 - startPage).keys()].map(
-      (i) => startPage + i
-    );
-
-    return {
-      totalItems: totalItems,
-      currentPage: currentPage,
-      pageSize: pageSize,
-      totalPages: totalPages,
-      startPage: startPage,
-      endPage: endPage,
-      startIndex: startIndex,
-      endIndex: endIndex,
-      pages: pages,
-    };
-  }
-
-  render() {
-    let pager = this.state.pager;
-
-    if (!pager.pages || pager.pages.length <= 1) {
-      return null;
-    }
-
-    const { radius, color, firstLast, prevNext } = this.props;
-
-    return (
-      <Container radius={radius} color={color}>
-        <Paginator>
-          {firstLast && (
-            <ListItem className={pager.currentPage === 1 ? "disabled" : ""}>
-              <Items onClick={() => this.setPage(1)}>First</Items>
-            </ListItem>
-          )}
-          {prevNext && (
-            <ListItem className={pager.currentPage === 1 ? "disabled" : ""}>
-              <Items onClick={() => this.setPage(pager.currentPage - 1)}>
-                {" "}
-                <FiChevronsLeft />{" "}
-              </Items>
-            </ListItem>
-          )}
-          {pager.pages.map((page, index) => (
+        {pagedTableDataArray
+          .slice(
+            largePageIndex ? activeIndex - 3 : 0,
+            largePageIndex ? activeIndex + 7 : 10
+          )
+          .map((num, index) => (
             <ListItem
-              onClick={() => this.setPage(page)}
-              key={generateID(14)}
-              className={pager.currentPage === page ? "active" : ""}
+              onClick={() =>
+                getCurrentArray(
+                  largePageIndex ? index + activeIndex - 3 : index
+                )
+              }
+              active={
+                largePageIndex
+                  ? activeIndex === index + activeIndex - 3
+                  : activeIndex === index
+              }
+              key={generateID(11)}
             >
-              <Items>{page}</Items>
+              <Items
+                active={
+                  largePageIndex
+                    ? activeIndex === index + activeIndex - 3
+                    : activeIndex === index
+                }
+              >
+                {largePageIndex ? index + 1 + activeIndex - 3 : index + 1}
+              </Items>
             </ListItem>
           ))}
-          {prevNext && (
-            <ListItem
-              className={
-                pager.currentPage === pager.totalPages ? "disabled" : ""
-              }
-            >
-              <Items onClick={() => this.setPage(pager.currentPage + 1)}>
-                <FiChevronsRight />
-              </Items>
-            </ListItem>
-          )}
-          {firstLast && (
-            <ListItem
-              className={
-                pager.currentPage === pager.totalPages ? "disabled" : ""
-              }
-            >
-              <Items onClick={() => this.setPage(pager.totalPages)}>Last</Items>
-            </ListItem>
-          )}
-        </Paginator>
-      </Container>
-    );
-  }
-}
 
-Pagination.propTypes = propTypes;
-Pagination.defaultProps = defaultProps;
+        <ListItem
+          disabled={!(pagedTableDataArray.length >= activeIndex + 2)}
+          onClick={() =>
+            pagedTableDataArray.length >= activeIndex + 2 &&
+            getCurrentArray(activeIndex + 1)
+          }
+        >
+          <FiChevronsRight />
+        </ListItem>
+
+        {firstLast ? (
+          <FirstLast
+            disabled={activeIndex === pagedTableDataArray.length - 1}
+            onClick={() => getCurrentArray(pagedTableDataArray.length - 1)}
+          >
+            Last
+          </FirstLast>
+        ) : null}
+      </Paginator>
+    </Container>
+  );
+};
+
+// Pagination.propTypes = propTypes;
+// Pagination.defaultProps = defaultProps;
 export default Pagination;
