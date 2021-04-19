@@ -50,8 +50,6 @@ export const Indicators = styled.button`
     currentIndicator
       ? activeColor
         ? activeColor
-        : theme
-        ? theme.palette.primary.main
-        : "blue"
-      : "#dedce1"};
+        : theme.palette.primary.main
+      : theme.palette.grey[100]};
 `;

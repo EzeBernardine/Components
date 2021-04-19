@@ -79,6 +79,7 @@ const Pagination = ({ items, onChangePage, pageSize, firstLast, prevNext }) => {
             <FiChevronsLeft />
           </ListItem>
         )}
+        
         {pagedTableDataArray
           .slice(
             largePageIndex ? activeIndex - 3 : 0,

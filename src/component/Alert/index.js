@@ -14,6 +14,14 @@ const Alert = ({ type, duration, children }) => {
   // handle the display of the alert component.
   const [visible, setVisible] = useState(true);
 
+  // alert types
+  const types = {
+    success: <SuccessOutlineIcon width="20px" height="20px" />,
+    error: <ErrorOutlineIcon width="20px" height="20px" />,
+    warning: <WarningIcon width="20px" height="20px" />,
+    info: <InfoIcon width="20px" height="20px" />,
+  };
+
   useEffect(() => {
     let timeout =
       duration &&
@@ -21,7 +29,7 @@ const Alert = ({ type, duration, children }) => {
        * visible determines if the alert component is displayed or not is set to false after a a period of time.
        *
        * If no duration is set,
-       * it remains true making the alert component always visible.
+       * it remains true keeping the alert component always visible.
        */
       setTimeout(() => {
         setVisible(false);
@@ -34,21 +42,11 @@ const Alert = ({ type, duration, children }) => {
     <>
       {visible ? (
         <Container type={type}>
-          <IconType type={type}>
-            {type === "success" ? (
-              <SuccessOutlineIcon width="20px" height="20px" />
-            ) : type === "error" ? (
-              <ErrorOutlineIcon width="20px" height="20px" />
-            ) : type === "warning" ? (
-              <WarningIcon width="20px" height="20px" />
-            ) : type === "info" ? (
-              <InfoIcon width="20px" height="20px" />
-            ) : null}
-          </IconType>
+          <IconType type={type}>{types[type]}</IconType>
 
-          {type === "warning" || type === "info" ? (
+          {!duration ? (
             <Close onClick={() => setVisible(false)}>
-              <CloseIcon width="13px" height="13px" />
+              <CloseIcon width="10px" height="10px" />
             </Close>
           ) : null}
 
@@ -60,7 +58,7 @@ const Alert = ({ type, duration, children }) => {
 };
 
 Alert.propTypes = {
-  type: PropTypes.oneOf(["error", "success", "warning"]),
+  type: PropTypes.oneOf(["error", "success", "warning", "info"]),
   children: PropTypes.elementType,
   duration: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
 };

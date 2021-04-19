@@ -8,7 +8,7 @@ export const Wrapper = styled("div")`
 `;
 
 export const Layout = styled.div`
-  background: ${({ theme }) => theme.palette.grey[0] || "#eff0f5"};
+  background: ${({ theme }) => theme.palette.grey[0]};
   cursor: ${({ canClick }) =>
     canClick === undefined ? "pointer" : canClick ? "pointer" : "not-allowed"};
   padding: ${({ padding }) => (padding ? padding : "5px 13px")};
@@ -16,7 +16,6 @@ export const Layout = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #777;
   transition: 250ms ease-in-out;
   border: ${({ theme }) => "1px solid " + theme.palette.grey[10]};
 
@@ -26,9 +25,9 @@ export const Layout = styled.div`
       canClick ? theme.palette.grey[300] : theme.palette.grey[200]};
   }
   &:hover {
-    box-shadow: ${({ canClick }) => canClick && "1px 3px 9px -6px #0003"};
+    box-shadow: ${({ canClick, theme }) => canClick && theme.shadows[1]};
     background: ${({ theme, canClick }) =>
-      !canClick ? "#dcdde1" : theme ? theme.palette.grey[0] : "#e3e3e3"};
+      !canClick ? theme.palette.grey[400] : theme.palette.grey[0]};
     color: ${({ dropCol }) => dropCol && dropCol};
     & > span {
       opacity: 1;
@@ -39,8 +38,9 @@ export const Layout = styled.div`
 export const Content = styled.span`
   color: ${({ theme, canClick }) =>
     canClick ? theme.palette.grey[300] : theme.palette.grey[200]};
-  font-size: ${({ theme }) => (theme ? theme.fontSizes.xsmall : " 13px")};
-  font-weight: ${({ weight }) => weight || "600"};
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
+  font-weight: ${({ weight, theme }) =>
+    weight || theme.typography.fontWeightBold};
   padding-right: 10px;
 `;
 
@@ -63,8 +63,8 @@ export const Dropdown = styled.ul`
   top: 5px;
   z-index: 10009;
   border: 0;
-  right: ${({ end }) => (end ? 0 : "auto")};
-  left: ${({ start }) => (start ? 0 : "auto")};
+  right: ${({ direction }) => (direction === "end" ? 0 : "auto")};
+  left: ${({ direction }) => (direction === "start" ? 0 : "auto")};
   margin: 2px auto 0;
   padding: 5px 0;
   font-size: 14px;
@@ -74,11 +74,11 @@ export const Dropdown = styled.ul`
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   border-radius: 5px;
   background-clip: padding-box;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.palette.common.white};
   max-height: 200px;
   overflow-y: auto;
   overflow-x: hidden;
-  scrollbar-color: #e3e3e3 transparent;
+  scrollbar-color: ${({ theme }) => theme.palette.grey[100] + " transparent"};
   scrollbar-width: thin;
   &::-webkit-scrollbar {
     width: 5px;
@@ -90,20 +90,20 @@ export const Dropdown = styled.ul`
   }
   &::-webkit-scrollbar-thumb {
     border-radius: 50px;
-    background: #e3e3e3;
+    background: ${({ theme }) => theme.palette.grey[100]};
   }
   &::-webkit-scrollbar-thumb:active {
-    background: #ff6600;
+    background: ${({ theme }) => theme.palette.primary.main};
   }
   &::-webkit-scrollbar-track {
     background: transparent;
     border-radius: 53px;
   }
   &::-webkit-scrollbar-track:hover {
-    background: #eff0f5;
+    background: ${({ theme }) => theme.palette.grey[200]};
   }
   &::-webkit-scrollbar-track:active {
-    background: #e3e3e3;
+    background: ${({ theme }) => theme.palette.grey[300]};
   }
   &::-webkit-scrollbar-corner {
     background: transparent;
@@ -112,40 +112,28 @@ export const Dropdown = styled.ul`
 export const ListItems = styled.li`
   list-style: none;
   cursor: pointer;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  font-weight: 400;
   text-align: left;
   height: 100%;
   margin: 0;
   display: block;
   position: relative;
-  font-size: 13px;
   min-height: unset;
   display: flex;
   padding: 10px 15px;
 
   &:hover {
-    box-shadow: 0 12px 20px -10px rgba(156, 39, 176, 0.28),
-      0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(156, 39, 176, 0.2);
-    background-color: ${({ theme }) =>
-      theme ? theme.palette.primary.main : "#6464e6"};
+    box-shadow: ${({ theme }) => theme.shadows[2]};
+    background-color: ${({ theme }) => theme.palette.primary.main};
     span {
-      color: ${({ theme }) =>
-        theme ? theme.palette.common.white + " !important" : "#fff !important"};
+      color: ${({ theme }) => theme.palette.common.white};
     }
   }
-
-  /* .modalIcon {
-    width: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
 `;
 export const Item = styled.span`
   height: 100%;
   flex: 1;
-  color: ${({ theme }) => (theme ? theme.palette.grey[300] : "#333")};
+  color: ${({ theme }) => theme.palette.grey[300]};
   font-size: 13px;
-  font-weight: 550;
+  font-weight: ${({ weight, theme }) =>
+    weight || theme.typography.fontWeightBold};
 `;

@@ -12,10 +12,9 @@ const data = [{ list: "CRK" }, { list: "Coding" }, { list: "Agriculture" }];
 export const select = Template.bind({});
 select.args = {
   initial: " Subjects",
-  weight: "bold",
+  // weight: "bold",
   padding: "7px 15px",
-  end: false,
-  start: true,
+  direction: "start",
   canClick: true,
   data: data,
   click: (selected) => console.log(selected),
@@ -23,10 +22,9 @@ select.args = {
 
 export const showMore = Template.bind({});
 showMore.args = {
-  weight: "bold",
+  // weight: "bold",
   padding: "7px 15px",
-  end: false,
-  start: true,
+  direction: "start",
   canClick: true,
   type: "showmore",
   data: data,

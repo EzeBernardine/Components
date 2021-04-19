@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import {
   Wrapper,
   Layout,
@@ -19,8 +19,7 @@ const DropdownModal = ({
   padding,
   click,
   initial,
-  start,
-  end,
+  direction,
   canClick = true,
   weight,
   icon,
@@ -65,7 +64,7 @@ const DropdownModal = ({
 
       {openModal && (
         <DropdownWrap>
-          <Dropdown end={end} start={start}>
+          <Dropdown direction={direction}>
             {data.map((item) => (
               <ListItems
                 onClick={() => canClick && handleSelectOption(`${item.list}`)}
@@ -86,8 +85,7 @@ DropdownModal.propTypes = {
   padding: PropTypes.string,
   click: PropTypes.func,
   initial: PropTypes.string,
-  start: PropTypes.bool,
-  end: PropTypes.bool,
+  direction: PropTypes.oneOf(["start", "end"]),
   canClick: PropTypes.bool,
   weight: PropTypes.string,
   icon: PropTypes.element,

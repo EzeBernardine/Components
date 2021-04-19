@@ -15,9 +15,7 @@ export const Container = styled.div`
       ? `1px solid  ${theme.palette.warning.light}`
       : type === "info"
       ? `1px solid  ${theme.palette.info.light}`
-      : type === "error"
-      ? `1px solid  ${theme.palette.error.light}`
-      : null};
+      : `1px solid  ${theme.palette.error.light}`};
   background: ${({ type, theme }) =>
     type === "success"
       ? theme.palette.success.light
@@ -25,9 +23,7 @@ export const Container = styled.div`
       ? theme.palette.warning.light
       : type === "info"
       ? theme.palette.info.light
-      : type === "error"
-      ? theme.palette.error.light
-      : null};
+      : theme.palette.error.light};
 `;
 
 export const IconType = styled.span`
@@ -40,9 +36,7 @@ export const IconType = styled.span`
         ? theme.palette.warning.main
         : type === "info"
         ? theme.palette.info.main
-        : type === "error"
-        ? theme.palette.error.main
-        : "green"};
+        : theme.palette.error.main};
   }
 `;
 export const Children = styled.span`
@@ -56,24 +50,22 @@ export const Children = styled.span`
         ? theme.palette.warning.dark
         : type === "info"
         ? theme.palette.info.dark
-        : type === "error"
-        ? theme.palette.error.dark
-        : null};
+        : theme.palette.error.dark};
   }
 `;
 export const Close = styled.button`
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 10px;
+  right: 10px;
   border: none;
   padding: 0;
   background-color: transparent;
-  color: ${({ theme }) => theme.palette.grey[200] || "#fafafa"};
+  color: ${({ theme }) => theme.palette.grey[200]};
   font-size: 12px;
   cursor: pointer;
   font-weight: 500;
   :hover {
     background-color: transparent;
-    color: ${({ theme }) => theme.palette.grey[300] || "#fafafa"};
+    color: ${({ theme }) => theme.palette.grey[300]};
   }
 `;

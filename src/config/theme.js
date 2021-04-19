@@ -43,18 +43,23 @@ const palette = {
     100: "#EAEAEA",
     200: "#C9C5C5",
     300: "#888",
-    400: "#666",
+    400: "#dcdde1",
+    500: "#666",
   },
 };
 
 const shadows = {
   0: "none",
-  1: "0px 5px 10px rgba(0, 0, 0, 0.12)",
-  2: "0px 8px 30px rgba(0, 0, 0, 0.24)",
+  1: "1px 3px 9px -6px #0003",
+  2: "0 12px 20px -10px rgba(156, 39, 176, 0.28),  0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(156, 39, 176, 0.2)",
 };
 
 const typography = {
   fontFamily: '"Fira Sans", sans-serif',
+  fontWeightLight: 300,
+  fontWeightRegular: 400,
+  fontWeightMedium: 500,
+  fontWeightBold: 700,
 };
 
 const shape = {
