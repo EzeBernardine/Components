@@ -7,7 +7,7 @@ export const Container = styled.div`
   position: relative;
   padding: 20px 30px 20px 30px;
   display: flex;
-  border-radius: 4px;
+  border-radius: ${({ theme }) => theme.shape.borderRadius};
   border: ${({ type, theme }) =>
     type === "success"
       ? `1px solid ${theme.palette.success.light}`
@@ -41,7 +41,7 @@ export const IconType = styled.span`
 `;
 export const Children = styled.span`
   * {
-    font-size: 14px;
+    font-size: ${({ theme }) => theme.shape.fontSizes.small};;
     line-height: 20px;
     color: ${({ type, theme }) =>
       type === "success"

@@ -14,7 +14,7 @@ const Alert = ({ type, duration, children }) => {
   // handle the display of the alert component.
   const [visible, setVisible] = useState(true);
 
-  // alert types
+  // different alert types
   const types = {
     success: <SuccessOutlineIcon width="20px" height="20px" />,
     error: <ErrorOutlineIcon width="20px" height="20px" />,
