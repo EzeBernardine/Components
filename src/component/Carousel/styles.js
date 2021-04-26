@@ -42,7 +42,7 @@ export const Indicators = styled.button`
   transition: 1s ease-out;
   height: 8px;
   margin: 0 10px;
-  border-radius: 4px;
+  border-radius: ${({ theme }) => theme.shape.borderRadius};
   cursor: pointer;
   border: none;
   width: ${({ currentIndicator }) => (currentIndicator ? "32px" : "16px")};
