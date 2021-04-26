@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   font-family: ${({ theme }) => theme.typography.fontFamily};
   position: relative;
-  z-index: 10;
+  z-index: ${({ theme }) => theme.zIndex.mobileStepper};
   position: relative;
   padding: 20px 30px 20px 30px;
   display: flex;
@@ -41,7 +41,7 @@ export const IconType = styled.span`
 `;
 export const Children = styled.span`
   * {
-    font-size: ${({ theme }) => theme.shape.fontSizes.small};;
+    font-size: ${({ theme }) => theme.shape.fontSizes.small};
     line-height: 20px;
     color: ${({ type, theme }) =>
       type === "success"
