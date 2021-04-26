@@ -11,6 +11,7 @@ export const spacing = {
 };
 
 export const fontSizes = {
+  xxsmall: "0.75rem", //12px
   xsmall: "0.813rem", //13px
   small: "0.875rem", //14px
   medium: "1rem", //16px

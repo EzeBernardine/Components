@@ -41,7 +41,7 @@ export const IconType = styled.span`
 `;
 export const Children = styled.span`
   * {
-    font-size: ${({ theme }) => theme.shape.fontSizes.small};
+    font-size: ${({ theme }) => theme.fontSizes.small};
     line-height: 20px;
     color: ${({ type, theme }) =>
       type === "success"
@@ -61,9 +61,9 @@ export const Close = styled.button`
   padding: 0;
   background-color: transparent;
   color: ${({ theme }) => theme.palette.grey[200]};
-  font-size: 12px;
+  font-size: ${({ theme }) => theme.fontSizes.xxsmall};
   cursor: pointer;
-  font-weight: 500;
+  font-weight: ${({theme}) => theme.typography.fontWeightMedium};
   :hover {
     background-color: transparent;
     color: ${({ theme }) => theme.palette.grey[300]};
