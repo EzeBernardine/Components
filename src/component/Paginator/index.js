@@ -53,7 +53,7 @@ const Pagination = ({ items, onChangePage, pageSize, firstLast, prevNext }) => {
   };
 
   useEffect(() => {
-    //sets the number of pagedData array
+    //sets the number of pagedData
     setPagedTableDataArray(chunkArray(items, pageSize));
     //Set the initail pagedData
     getCurrentArray(0);
