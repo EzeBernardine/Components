@@ -20,23 +20,23 @@ const Pagination = ({ items, onChangePage, pageSize, firstLast, prevNext }) => {
    * @param {Number} pageSize
    * @param {Array} array
    * @returns {Array}
-   * split the entire tableDataprops into pageSize number of arrays
-   * and push it into a new array,
+   * split the entire tableData props into pageSize number of arrays,
+   * and pushes it into a new array,
    * thereby returning an array of arrays containing pageSize lenght of arrays.
    */
-  const chunkArray = (array, pageSize) => {
-    let tempArray = [];
+  const splitTableDataIntoChunksOfArray = (array, pageSize) => {
+    let temporaryArray = [];
     for (let i = 0; i < array.length; i += pageSize) {
       let myChunk = array.slice(i, i + pageSize);
-      tempArray.push(myChunk);
+      temporaryArray.push(myChunk);
     }
-    return tempArray;
+    return temporaryArray;
   };
 
   /**
    *
    * @param {Number} index
-   * @returns sets the active tableArray current index
+   * @returns  active tableArray current index
    */
   const activeTableNumber = (index) => setActiveIndex(index);
 
@@ -47,14 +47,14 @@ const Pagination = ({ items, onChangePage, pageSize, firstLast, prevNext }) => {
    * passes onChangePage the current table pagedData onChange of the table pages
    */
   const getCurrentArray = (index) => {
-    let tempArray = chunkArray(items, pageSize);
-    onChangePage(tempArray[index]);
+    let temporaryArray = splitTableDataIntoChunksOfArray(items, pageSize);
+    onChangePage(temporaryArray[index]);
     return activeTableNumber(index);
   };
 
   useEffect(() => {
     //sets the number of pagedData
-    setPagedTableDataArray(chunkArray(items, pageSize));
+    setPagedTableDataArray(splitTableDataIntoChunksOfArray(items, pageSize));
     //Set the initail pagedData
     getCurrentArray(0);
   }, []);
