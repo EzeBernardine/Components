@@ -11,12 +11,11 @@ import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import { generateID } from "../../lib/generateID";
 
 const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
-  const [pagedTableDataArray, setPagedTableDataArray] = useState([]);
+  const [tableData, setTableData] = useState([]);
   const [page, setPage] = useState(0); //holds the active clicked paginator list
 
-  let moreThanThreePages = page > 3; //returns true if the active index is more than 3
-  let threePagesBackward = page - 3; //
-  let sevenPagesFoward = page + 7; //
+  let threePagesBackward = page > 3 ? page - 3 : page;
+  let sevenPagesFoward = page >= 3 ? page + 7 : page;
 
   /**
    * @param {Number} pageSize
@@ -38,9 +37,9 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
   /**
    *
    * @param {Number} index
-   * @returns  active tableData current index
+   * @returns  number
    */
-  const activeTableNumber = (index) => setPage(index);
+  const activePage = (index) => setPage(index);
 
   /**
    *
@@ -48,95 +47,77 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
    * @returns  a call to set active pagedTable index
    * passes onPageChange the current table pagedData onChange of the table pages
    */
-  const getSelectedPageData = (index) => {
+  const activePageData = (index) => {
     let temporaryArray = splitTableDataIntoChunksOfArray(items, pageSize);
     onPageChange(temporaryArray[index]);
-    return activeTableNumber(index);
+    return activePage(index);
   };
 
   /**
-   * 
-   * @param {Array} arr 
-   * @returns required pages
+   *
+   * @param {Array} arr
+   * @returns required pages data
    */
   const getTenPagesMax = (arr) =>
-    arr.slice(
-      moreThanThreePages ? threePagesBackward : 0,
-      moreThanThreePages ? sevenPagesFoward : 10
-    );
+    arr.slice((threePagesBackward, sevenPagesFoward));
 
   useEffect(() => {
     //sets the number of pagedData
-    setPagedTableDataArray(splitTableDataIntoChunksOfArray(items, pageSize));
+    setTableData(splitTableDataIntoChunksOfArray(items, pageSize));
     //Set the initail pagedData
-    getSelectedPageData(0);
+    activePageData(0);
   }, []);
 
   return (
     <Container>
       <Paginator>
+        {/* first takes you to the first page */}
         {firstLast ? (
-          <FirstLast
-            disabled={page === 0}
-            onClick={() => getSelectedPageData(0)}
-          >
+          <FirstLast disabled={page === 0} onClick={() => activePageData(0)}>
             First
           </FirstLast>
         ) : null}
 
+        {/* This left arrow icon return previous page */}
         {prevNext && (
           <ListItem
             disabled={!(page >= 1)}
-            onClick={() => page >= 1 && getSelectedPageData(page - 1)}
+            onClick={() => page >= 1 && activePageData(page - 1)}
           >
             <FiChevronsLeft />
           </ListItem>
         )}
 
-        {getTenPagesMax(pagedTableDataArray).map((num, index) => (
+        {/* This  is the page numbers which return a maximum of 10 pages at a time*/}
+        {getTenPagesMax(tableData).map((num, index) => (
           <ListItem
-            onClick={() =>
-              getSelectedPageData(
-                moreThanThreePages ? index + threePagesBackward : index
-              )
-            }
-            active={
-              moreThanThreePages
-                ? page === index + threePagesBackward
-                : page === index
-            }
+            onClick={() => activePageData(index + threePagesBackward)}
+            active={page === index + threePagesBackward}
             key={generateID(11)}
           >
-            <Items
-              active={
-                moreThanThreePages
-                  ? page === index + threePagesBackward
-                  : page === index
-              }
-            >
-              {moreThanThreePages ? index + 1 + threePagesBackward : index + 1}
+            <Items active={page === index + threePagesBackward}>
+              {index + 1 + threePagesBackward}
             </Items>
           </ListItem>
         ))}
 
+        {/* This right arrow icon return next page */}
         {prevNext && (
           <ListItem
-            disabled={!(pagedTableDataArray.length >= page + 2)}
+            disabled={!(tableData.length >= page + 2)}
             onClick={() =>
-              pagedTableDataArray.length >= page + 2 &&
-              getSelectedPageData(page + 1)
+              tableData.length >= page + 2 && activePageData(page + 1)
             }
           >
             <FiChevronsRight />
           </ListItem>
         )}
 
+        {/* last takes you to the last page */}
         {firstLast ? (
           <FirstLast
-            disabled={page === pagedTableDataArray.length - 1}
-            onClick={() =>
-              getSelectedPageData(pagedTableDataArray.length - 1)
-            }
+            disabled={page === tableData.length - 1}
+            onClick={() => activePageData(tableData.length - 1)}
           >
             Last
           </FirstLast>
