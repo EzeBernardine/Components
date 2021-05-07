@@ -14,8 +14,9 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
   const [tableData, setTableData] = useState([]);
   const [page, setPage] = useState(0); //holds the active clicked paginator list
 
-  let threePagesBackward = page > 3 ? page - 3 : page;
-  let sevenPagesFoward = page >= 3 ? page + 7 : page;
+  let moreThanFirstThreePages = page > 3; //returns true if the active index is more than 3
+  let threePagesBackward = page - 3; //
+  let sevenPagesFoward = page + 7; //
 
   /**
    * @param {Number} pageSize
@@ -59,7 +60,10 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
    * @returns required pages data
    */
   const getTenPagesMax = (arr) =>
-    arr.slice((threePagesBackward, sevenPagesFoward));
+    arr.slice(
+      moreThanFirstThreePages ? threePagesBackward : 0,
+      moreThanFirstThreePages ? sevenPagesFoward : 10
+    );
 
   useEffect(() => {
     //sets the number of pagedData
@@ -91,12 +95,28 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
         {/* This  is the page numbers which return a maximum of 10 pages at a time*/}
         {getTenPagesMax(tableData).map((num, index) => (
           <ListItem
-            onClick={() => activePageData(index + threePagesBackward)}
-            active={page === index + threePagesBackward}
+            onClick={() =>
+              activePageData(
+                moreThanFirstThreePages ? index + threePagesBackward : index
+              )
+            }
+            active={
+              moreThanFirstThreePages
+                ? page === index + threePagesBackward
+                : page === index
+            }
             key={generateID(11)}
           >
-            <Items active={page === index + threePagesBackward}>
-              {index + 1 + threePagesBackward}
+            <Items
+              active={
+                moreThanFirstThreePages
+                  ? page === index + threePagesBackward
+                  : page === index
+              }
+            >
+              {moreThanFirstThreePages
+                ? index + 1 + threePagesBackward
+                : index + 1}
             </Items>
           </ListItem>
         ))}
