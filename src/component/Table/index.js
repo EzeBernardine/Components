@@ -114,7 +114,7 @@ const CustomTable = ({
               items={tableBody}
               pageSize={pageSize || 5}
               prevNext={prevNext || false}
-              onChangePage={(item) => setPagedData(item)}
+              onPageChange={(item) => setPagedData(item)}
               firstLast={firstLast || false}
             />
           </Paginator>
