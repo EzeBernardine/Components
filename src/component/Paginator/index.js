@@ -12,24 +12,24 @@ import { generateID } from "../../lib/generateID";
 
 const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
   //holds page number and each page data
-  const [{ pageNumber, tableData }, setPages] = useState({
-    pageNumber: 0,
+  const [{ currentPage, tableData }, setPages] = useState({
+    currentPage: 0,
     tableData: [],
   });
 
-  const afterFirstThreePages = pageNumber > 3; //returns true if the current page number is more than 3
+  const afterFirstThreePages = currentPage > 3; //returns true if the current page number is more than 3
   const isPagesUpToTen = tableData.length > 10; //returns true if total number of page  is more than 10
   let fewPagesBackward;
-  const sevenPagesFoward = afterFirstThreePages ? pageNumber + 7 : 10;
-  const TenModulePages = 10 - (tableData.length - pageNumber + 1) + 1;
+  const sevenPagesFoward = afterFirstThreePages ? currentPage + 7 : 10;
+  const TenModulePages = 10 - (tableData.length - currentPage + 1) + 1; //returns number of pages remaining to complete the total displayed pages up to 10
 
   const gottenToLastPage = !tableData[sevenPagesFoward]; // is true if the last page number is visible
 
   if (isPagesUpToTen && afterFirstThreePages) {
     if (gottenToLastPage) {
-      fewPagesBackward = pageNumber - TenModulePages;
+      fewPagesBackward = currentPage - TenModulePages;
     } else {
-      fewPagesBackward = pageNumber - 3;
+      fewPagesBackward = currentPage - 3; //take 3 steps backwards
     }
   } else {
     fewPagesBackward = 0;
@@ -58,7 +58,7 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
    * @returns  a call to set the active page number
    */
   const activePage = (index) =>
-    setPages((prev) => ({ ...prev, pageNumber: index }));
+    setPages((prev) => ({ ...prev, currentPage: index }));
 
   /**
    *
@@ -95,7 +95,7 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
         {/* first takes you to the first page */}
         {firstLast ? (
           <FirstLast
-            disabled={pageNumber === 0}
+            disabled={currentPage === 0}
             onClick={() => activePageData(0)}
           >
             First
@@ -105,8 +105,8 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
         {/* This left arrow icon return previous page */}
         {prevNext && (
           <ListItem
-            disabled={!(pageNumber >= 1)}
-            onClick={() => pageNumber >= 1 && activePageData(pageNumber - 1)}
+            disabled={!(currentPage >= 1)}
+            onClick={() => currentPage >= 1 && activePageData(currentPage - 1)}
           >
             <FiChevronsLeft />
           </ListItem>
@@ -116,10 +116,10 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
         {getTenPages(tableData).map((num, index) => (
           <ListItem
             onClick={() => activePageData(index + fewPagesBackward)}
-            active={pageNumber === index + fewPagesBackward}
+            active={currentPage === index + fewPagesBackward}
             key={generateID(11)}
           >
-            <Items active={pageNumber === index + fewPagesBackward}>
+            <Items active={currentPage === index + fewPagesBackward}>
               {index + 1 + fewPagesBackward}
             </Items>
           </ListItem>
@@ -128,10 +128,10 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
         {/* This right arrow icon return next page */}
         {prevNext && (
           <ListItem
-            disabled={!(tableData.length >= pageNumber + 2)}
+            disabled={!(tableData.length >= currentPage + 2)}
             onClick={() =>
-              tableData.length >= pageNumber + 2 &&
-              activePageData(pageNumber + 1)
+              tableData.length >= currentPage + 2 &&
+              activePageData(currentPage + 1)
             }
           >
             <FiChevronsRight />
@@ -141,7 +141,7 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
         {/* last takes you to the last page */}
         {firstLast ? (
           <FirstLast
-            disabled={pageNumber === tableData.length - 1}
+            disabled={currentPage === tableData.length - 1}
             onClick={() => activePageData(tableData.length - 1)}
           >
             Last
