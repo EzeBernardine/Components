@@ -15,17 +15,21 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
   const [page, setPage] = useState(0); //holds the active clicked paginator list
 
   let moreThanFirstThreePages = page > 3; //returns true if the current page number is more than 3
-  let threePagesBackward = moreThanFirstThreePages ? page - 3 : 0;
+  let isPagesUpToTen = tableData.length > 10; //returns true if total number of page  is more than 10
+  let fewPagesBackward;
   let sevenPagesFoward = moreThanFirstThreePages ? page + 7 : 10;
+  let pagesModuleTen = 10 - (tableData.length - page + 1) + 1;
 
-  let pagesAwayFromTen = 10 - (tableData.length - page + 1) + 1;
+  let gottenToLastPage = !tableData[sevenPagesFoward];
 
-  let isPagesUpToTen = tableData[sevenPagesFoward];
-  if (!isPagesUpToTen) {
-    threePagesBackward = moreThanFirstThreePages ? page - pagesAwayFromTen : 0;
-    console.log(pagesAwayFromTen, "false");
+  if (isPagesUpToTen) {
+    if (gottenToLastPage) {
+      fewPagesBackward = moreThanFirstThreePages ? page - pagesModuleTen : 0;
+    } else {
+      fewPagesBackward = moreThanFirstThreePages ? page - 3 : 0;
+    }
   } else {
-    console.log(pagesAwayFromTen, true);
+    fewPagesBackward = 0;
   }
 
   /**
@@ -69,8 +73,7 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
    * @param {Array} arr
    * @returns 10 current page data
    */
-  const getTenPagesMax = (arr) =>
-    arr.slice(threePagesBackward, sevenPagesFoward);
+  const getTenPagesMax = (arr) => arr.slice(fewPagesBackward, sevenPagesFoward);
 
   useEffect(() => {
     //sets the number of pagedData
@@ -102,12 +105,12 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
         {/* This  is the page numbers which return a maximum of 10 pages at a time*/}
         {getTenPagesMax(tableData).map((num, index) => (
           <ListItem
-            onClick={() => activePageData(index + threePagesBackward)}
-            active={page === index + threePagesBackward}
+            onClick={() => activePageData(index + fewPagesBackward)}
+            active={page === index + fewPagesBackward}
             key={generateID(11)}
           >
-            <Items active={page === index + threePagesBackward}>
-              {index + 1 + threePagesBackward}
+            <Items active={page === index + fewPagesBackward}>
+              {index + 1 + fewPagesBackward}
             </Items>
           </ListItem>
         ))}
