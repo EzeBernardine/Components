@@ -13,10 +13,11 @@ import { generateID } from "../../lib/generateID";
 const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
   const [tableData, setTableData] = useState([]);
   const [page, setPage] = useState(0); //holds the active clicked paginator list
+  const [renderedPages, setRenderedPages] = useState([]);
 
-  let moreThanFirstThreePages = page > 3; //returns true if the active index is more than 3
-  let threePagesBackward = page - 3; //
-  let sevenPagesFoward = page + 7; //
+  let moreThanFirstThreePages = page > 3; //returns true if the current page number is more than 3
+  let threePagesBackward = moreThanFirstThreePages ? page - 3 : 0;
+  let sevenPagesFoward = moreThanFirstThreePages ? page + 7 : 10;
 
   /**
    * @param {Number} pageSize
@@ -45,8 +46,8 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
   /**
    *
    * @param {Number} index
-   * @returns  a call to set active pagedTable index
-   * passes onPageChange the current table pagedData onChange of the table pages
+   * @returns  a call to set current page
+   * passes onPageChange the current  page data once the page number changes
    */
   const activePageData = (index) => {
     let temporaryArray = splitTableDataIntoChunksOfArray(items, pageSize);
@@ -57,13 +58,14 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
   /**
    *
    * @param {Array} arr
-   * @returns required pages data
+   * @returns required page data
    */
-  const getTenPagesMax = (arr) =>
-    arr.slice(
-      moreThanFirstThreePages ? threePagesBackward : 0,
-      moreThanFirstThreePages ? sevenPagesFoward : 10
-    );
+  const getTenPagesMax = (arr) => {
+    let newTableData = arr.slice(threePagesBackward, sevenPagesFoward);
+    setRenderedPages(newTableData);
+
+    return newTableData;
+  };
 
   useEffect(() => {
     //sets the number of pagedData
@@ -95,28 +97,12 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
         {/* This  is the page numbers which return a maximum of 10 pages at a time*/}
         {getTenPagesMax(tableData).map((num, index) => (
           <ListItem
-            onClick={() =>
-              activePageData(
-                moreThanFirstThreePages ? index + threePagesBackward : index
-              )
-            }
-            active={
-              moreThanFirstThreePages
-                ? page === index + threePagesBackward
-                : page === index
-            }
+            onClick={() => activePageData(index + threePagesBackward)}
+            active={page === index + threePagesBackward}
             key={generateID(11)}
           >
-            <Items
-              active={
-                moreThanFirstThreePages
-                  ? page === index + threePagesBackward
-                  : page === index
-              }
-            >
-              {moreThanFirstThreePages
-                ? index + 1 + threePagesBackward
-                : index + 1}
+            <Items active={page === index + threePagesBackward}>
+              {index + 1 + threePagesBackward}
             </Items>
           </ListItem>
         ))}
