@@ -11,27 +11,25 @@ import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import { generateID } from "../../lib/generateID";
 
 const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
-  //holds all pages
+  //holds page number and each page data
   const [{ pageNumber, tableData }, setPages] = useState({
     pageNumber: 0,
     tableData: [],
   });
 
-  let moreThanFirstThreePages = pageNumber > 3; //returns true if the current page number is more than 3
-  let isPagesUpToTen = tableData.length > 10; //returns true if total number of page  is more than 10
+  const afterFirstThreePages = pageNumber > 3; //returns true if the current page number is more than 3
+  const isPagesUpToTen = tableData.length > 10; //returns true if total number of page  is more than 10
   let fewPagesBackward;
-  let sevenPagesFoward = moreThanFirstThreePages ? pageNumber + 7 : 10;
-  let TenModulePages = 10 - (tableData.length - pageNumber + 1) + 1;
+  const sevenPagesFoward = afterFirstThreePages ? pageNumber + 7 : 10;
+  const TenModulePages = 10 - (tableData.length - pageNumber + 1) + 1;
 
-  let gottenToLastPage = !tableData[sevenPagesFoward];
+  const gottenToLastPage = !tableData[sevenPagesFoward]; // is true if the last page number is visible
 
-  if (isPagesUpToTen) {
+  if (isPagesUpToTen && afterFirstThreePages) {
     if (gottenToLastPage) {
-      fewPagesBackward = moreThanFirstThreePages
-        ? pageNumber - TenModulePages
-        : 0;
+      fewPagesBackward = pageNumber - TenModulePages;
     } else {
-      fewPagesBackward = moreThanFirstThreePages ? pageNumber - 3 : 0;
+      fewPagesBackward = pageNumber - 3;
     }
   } else {
     fewPagesBackward = 0;
@@ -40,10 +38,10 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
   /**
    * @param {Number} pageSize
    * @param {Array} array
-   * @returns {Array}
+   * @returns Array
    * split the entire tableData props into pageSize number of arrays,
    * and pushes it into a new array.
-   * Returns an array of arrays containing pageSize lenght of arrays.
+   * Returns the new arrays containing pageSize lenght of arrays.
    */
   const splitTableDataIntoChunksOfArray = (array, pageSize) => {
     let temporaryArray = [];
@@ -57,7 +55,7 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
   /**
    *
    * @param {Number} index
-   * @returns  number
+   * @returns  a call to set the active page number
    */
   const activePage = (index) =>
     setPages((prev) => ({ ...prev, pageNumber: index }));
@@ -65,7 +63,7 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
   /**
    *
    * @param {Number} index
-   * @returns  a call to set current page
+   * @returns  a call to set active page number
    * passes onPageChange the current  page data once the page number changes
    */
   const activePageData = (index) => {
@@ -79,7 +77,7 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
    * @param {Array} arr
    * @returns 10 current page data
    */
-  const getTenPagesMax = (arr) => arr.slice(fewPagesBackward, sevenPagesFoward);
+  const getTenPages = (arr) => arr.slice(fewPagesBackward, sevenPagesFoward);
 
   useEffect(() => {
     //sets the number of pagedData
@@ -115,7 +113,7 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
         )}
 
         {/* This  is the page numbers which return a maximum of 10 pages at a time*/}
-        {getTenPagesMax(tableData).map((num, index) => (
+        {getTenPages(tableData).map((num, index) => (
           <ListItem
             onClick={() => activePageData(index + fewPagesBackward)}
             active={pageNumber === index + fewPagesBackward}
