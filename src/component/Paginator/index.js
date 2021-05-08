@@ -13,11 +13,20 @@ import { generateID } from "../../lib/generateID";
 const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
   const [tableData, setTableData] = useState([]);
   const [page, setPage] = useState(0); //holds the active clicked paginator list
-  const [renderedPages, setRenderedPages] = useState([]);
 
   let moreThanFirstThreePages = page > 3; //returns true if the current page number is more than 3
   let threePagesBackward = moreThanFirstThreePages ? page - 3 : 0;
   let sevenPagesFoward = moreThanFirstThreePages ? page + 7 : 10;
+
+  let pagesAwayFromTen = 10 - (tableData.length - page + 1) + 1;
+
+  let isPagesUpToTen = tableData[sevenPagesFoward];
+  if (!isPagesUpToTen) {
+    threePagesBackward = moreThanFirstThreePages ? page - pagesAwayFromTen : 0;
+    console.log(pagesAwayFromTen, "false");
+  } else {
+    console.log(pagesAwayFromTen, true);
+  }
 
   /**
    * @param {Number} pageSize
@@ -58,14 +67,10 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
   /**
    *
    * @param {Array} arr
-   * @returns required page data
+   * @returns 10 current page data
    */
-  const getTenPagesMax = (arr) => {
-    let newTableData = arr.slice(threePagesBackward, sevenPagesFoward);
-    setRenderedPages(newTableData);
-
-    return newTableData;
-  };
+  const getTenPagesMax = (arr) =>
+    arr.slice(threePagesBackward, sevenPagesFoward);
 
   useEffect(() => {
     //sets the number of pagedData
