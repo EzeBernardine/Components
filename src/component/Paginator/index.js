@@ -11,22 +11,27 @@ import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import { generateID } from "../../lib/generateID";
 
 const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
-  const [tableData, setTableData] = useState([]);
-  const [page, setPage] = useState(0); //holds the active clicked paginator list
+  //holds all pages
+  const [{ pageNumber, tableData }, setPages] = useState({
+    pageNumber: 0,
+    tableData: [],
+  });
 
-  let moreThanFirstThreePages = page > 3; //returns true if the current page number is more than 3
+  let moreThanFirstThreePages = pageNumber > 3; //returns true if the current page number is more than 3
   let isPagesUpToTen = tableData.length > 10; //returns true if total number of page  is more than 10
   let fewPagesBackward;
-  let sevenPagesFoward = moreThanFirstThreePages ? page + 7 : 10;
-  let pagesModuleTen = 10 - (tableData.length - page + 1) + 1;
+  let sevenPagesFoward = moreThanFirstThreePages ? pageNumber + 7 : 10;
+  let TenModulePages = 10 - (tableData.length - pageNumber + 1) + 1;
 
   let gottenToLastPage = !tableData[sevenPagesFoward];
 
   if (isPagesUpToTen) {
     if (gottenToLastPage) {
-      fewPagesBackward = moreThanFirstThreePages ? page - pagesModuleTen : 0;
+      fewPagesBackward = moreThanFirstThreePages
+        ? pageNumber - TenModulePages
+        : 0;
     } else {
-      fewPagesBackward = moreThanFirstThreePages ? page - 3 : 0;
+      fewPagesBackward = moreThanFirstThreePages ? pageNumber - 3 : 0;
     }
   } else {
     fewPagesBackward = 0;
@@ -54,7 +59,8 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
    * @param {Number} index
    * @returns  number
    */
-  const activePage = (index) => setPage(index);
+  const activePage = (index) =>
+    setPages((prev) => ({ ...prev, pageNumber: index }));
 
   /**
    *
@@ -77,8 +83,11 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
 
   useEffect(() => {
     //sets the number of pagedData
-    setTableData(splitTableDataIntoChunksOfArray(items, pageSize));
-    //Set the initail pagedData
+    setPages((prev) => ({
+      ...prev,
+      tableData: splitTableDataIntoChunksOfArray(items, pageSize),
+    }));
+
     activePageData(0);
   }, []);
 
@@ -87,7 +96,10 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
       <Paginator>
         {/* first takes you to the first page */}
         {firstLast ? (
-          <FirstLast disabled={page === 0} onClick={() => activePageData(0)}>
+          <FirstLast
+            disabled={pageNumber === 0}
+            onClick={() => activePageData(0)}
+          >
             First
           </FirstLast>
         ) : null}
@@ -95,8 +107,8 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
         {/* This left arrow icon return previous page */}
         {prevNext && (
           <ListItem
-            disabled={!(page >= 1)}
-            onClick={() => page >= 1 && activePageData(page - 1)}
+            disabled={!(pageNumber >= 1)}
+            onClick={() => pageNumber >= 1 && activePageData(pageNumber - 1)}
           >
             <FiChevronsLeft />
           </ListItem>
@@ -106,10 +118,10 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
         {getTenPagesMax(tableData).map((num, index) => (
           <ListItem
             onClick={() => activePageData(index + fewPagesBackward)}
-            active={page === index + fewPagesBackward}
+            active={pageNumber === index + fewPagesBackward}
             key={generateID(11)}
           >
-            <Items active={page === index + fewPagesBackward}>
+            <Items active={pageNumber === index + fewPagesBackward}>
               {index + 1 + fewPagesBackward}
             </Items>
           </ListItem>
@@ -118,9 +130,10 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
         {/* This right arrow icon return next page */}
         {prevNext && (
           <ListItem
-            disabled={!(tableData.length >= page + 2)}
+            disabled={!(tableData.length >= pageNumber + 2)}
             onClick={() =>
-              tableData.length >= page + 2 && activePageData(page + 1)
+              tableData.length >= pageNumber + 2 &&
+              activePageData(pageNumber + 1)
             }
           >
             <FiChevronsRight />
@@ -130,7 +143,7 @@ const Pagination = ({ items, onPageChange, pageSize, firstLast, prevNext }) => {
         {/* last takes you to the last page */}
         {firstLast ? (
           <FirstLast
-            disabled={page === tableData.length - 1}
+            disabled={pageNumber === tableData.length - 1}
             onClick={() => activePageData(tableData.length - 1)}
           >
             Last
